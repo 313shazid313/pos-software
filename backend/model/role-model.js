@@ -8,6 +8,10 @@ const Role = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
     CanAddData: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -24,12 +28,10 @@ const Role = sequelize.define(
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
-
   },
   {
     timestamps: false,
   }
 );
-
 
 module.exports = Role;

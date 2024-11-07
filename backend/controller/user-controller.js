@@ -5,7 +5,8 @@ const saltRounds = 10;
 
 const registerUser = async (req, res) => {
   try {
-    const { username, password, email, mobile, RoleId } = req.body;
+    const { username, password, email, mobile, RoleId, status } = req.body;
+
     const isUsernameExist = await User.findOne({
       where: { username: username },
     });
@@ -19,19 +20,20 @@ const registerUser = async (req, res) => {
     const hash = bcrypt.hashSync(password, salt);
     //? hashing password -------->
 
-    const data = await User.create({
+    const userData = await User.create({
       username,
       password: hash,
       email,
       mobile,
       RoleId,
+      status,
     });
 
     const roleData = await Role.findOne({ where: { id: RoleId } });
 
     return res
       .status(201)
-      .json({ message: "Registration successful", data, roleData });
+      .json({ message: "Registration successful", userData, roleData });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -55,13 +57,23 @@ const loginUser = async (req, res) => {
 
     return res.json({ message: "Login successful" });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        message: "An error occurred during login",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "An error occurred during login",
+      error: error.message,
+    });
   }
 };
 
-module.exports = { registerUser, loginUser };
+const getAllUser = async (req, res) => {
+  try {
+    const allUser = await User.findAll();
+    return res.json({ message: "getting all users", allUser });
+  } catch (error) {
+    return res.status(500).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { registerUser, loginUser, getAllUser };
