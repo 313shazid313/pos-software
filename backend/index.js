@@ -2,11 +2,13 @@ const express = require("express");
 const sequelize = require("./config/database");
 const rateLimit = require("express-rate-limit");
 const dotenv = require("dotenv");
+const morgan = require('morgan')
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(morgan('combined'))
 
 const port = process.env.PORT;
 
@@ -14,6 +16,7 @@ const port = process.env.PORT;
 const roleRoute = require("./router/role-router");
 const userRoute = require("./router/user-router");
 const productRoute = require("./router/product-router");
+const supplierRoute = require("./router/supplier-route");
 // importing routes
 
 sequelize
@@ -37,3 +40,4 @@ app.use(rateLimiter);
 app.use("/role", roleRoute);
 app.use("/user", userRoute);
 app.use("/product-route", productRoute);
+app.use("/supply", supplierRoute);
