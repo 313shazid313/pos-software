@@ -21,7 +21,7 @@ const getAllBrands = async (req, res) => {
 
 const deleteABrands = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await ProductBrand.destroy({
       where: {
         id: id,

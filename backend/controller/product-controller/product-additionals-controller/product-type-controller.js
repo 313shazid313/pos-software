@@ -22,14 +22,14 @@ const getAllTypes = async (req, res) => {
 
 const deleteAType = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await ProductType.destroy({
       where: {
         id: id,
       },
     });
 
-    return res.status(200).json({ message: "Delete Origin Successful" });
+    return res.status(200).json({ message: "Delete Type Successful" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

@@ -21,14 +21,14 @@ const getAllCategory = async (req, res) => {
 
 const deleteACategory = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await ProductCategory.destroy({
       where: {
         id: id,
       },
     });
 
-    return res.status(200).json({ message: "Delete Brand Successful" });
+    return res.status(200).json({ message: "Delete Category Successful" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

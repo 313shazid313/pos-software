@@ -1,16 +1,20 @@
 const express = require("express");
 const sequelize = require("./config/database");
 const rateLimit = require("express-rate-limit");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-const port = 8000;
+const port = process.env.PORT;
 
 // importing routes
 const roleRoute = require("./router/role-router");
 const userRoute = require("./router/user-router");
-//
+const productRoute = require("./router/product-router");
+// importing routes
 
 sequelize
   .sync()
@@ -30,6 +34,6 @@ const rateLimiter = rateLimit({
 
 app.use(rateLimiter);
 
-
 app.use("/role", roleRoute);
 app.use("/user", userRoute);
+app.use("/product-route", productRoute);

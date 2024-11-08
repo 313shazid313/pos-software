@@ -22,7 +22,7 @@ const getAllOrigin = async (req, res) => {
 
 const deleteAOrigin = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     await ProductOrigin.destroy({
       where: {
         id: id,

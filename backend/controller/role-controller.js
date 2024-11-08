@@ -33,7 +33,7 @@ const updateRole = async (req, res) => {
       status,
     } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const updateData = {
       roleName,
