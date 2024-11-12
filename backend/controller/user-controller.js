@@ -1,5 +1,7 @@
 const User = require("../model/user-model");
 const Role = require("../model/role-model");
+const ProductRolePermission = require("../model/role-models/product-role-permission-model");
+
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
@@ -19,8 +21,8 @@ const registerUser = async (req, res) => {
     //! hashing password -------->
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);
-    //! hashing password -------->
 
+    //! creatin user ------->
     const userData = await User.create({
       username,
       password: hash,
@@ -44,38 +46,44 @@ const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
     console.log(username);
-    //! checking if the user exist in the database -------
+
+    //! checking if the user exist in the database ------->
     const existUser = await User.findOne({ where: { username: username } });
     if (!existUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    //! checking if the user exist in the database --------
-    console.log(existUser);
-    //! getting role data from database ------
-    const roleId = existUser.RoleId;
-    const roleData = await Role.findOne({ where: { id: roleId } });
-    //! getting role data from database -------
+    // console.log(existUser);
 
+    //! checking password is valid or not ----->
     const isValid = await bcrypt.compare(password, existUser.password);
-
     if (!isValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    //! making payload for token --------
+    //! getting role data from database ------>
+    const roleId = existUser.RoleId;
+    const roleData = await Role.findOne({ where: { id: roleId } });
+
+    //! getting product permission data -------->
+    const ProductPermissionData = await ProductRolePermission.findOne({
+      where: { id: roleId },
+    });
+
+    //! making payload for token -------->
     const payloadData = {
       id: existUser.id,
       username: existUser.username,
       roleData,
+      ProductPermissionData,
     };
     // console.log(payloadData);
-    //! making payload for token --------
 
-    //! making token -------
+
+    //! making token ---------->
     const token = jwt.sign(payloadData, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    //! making token -------
+
 
     return res.json({ message: "Login successful", token });
   } catch (error) {
