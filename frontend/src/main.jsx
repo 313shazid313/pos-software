@@ -1,10 +1,37 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import Protected from './components/Protected.jsx';
+import UserTable from './components/ui/UserTable.jsx';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Protected />,
+    children: [
+      {
+        path: "users-table",
+        element: <UserTable/>
+      },
+      {
+        
+          path: "roles-table",
+          element: <UserTable/>
+        
+      }
+    ]
+  },
+]);
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
