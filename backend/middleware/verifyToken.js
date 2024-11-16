@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 // Middleware to verify the token
 const authenticateToken = (req, res, next) => {
   try {
-    // const token = req.cookies.token; //TODO: uncomment this when done
+    // const token = req.cookies.token;
     const token = req.headers.authorization;
     console.log("Token from cookies:", token);
     if (!token) {
@@ -11,9 +11,9 @@ const authenticateToken = (req, res, next) => {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // if (!decoded.userId) {
-    //   return res.status(403).send({ message: "Access denied!" });
-    // }
+    if (!decoded.userId) {
+      return res.status(403).send({ message: "Access denied!" });
+    }
 
     console.log(decoded);
 

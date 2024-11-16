@@ -3,13 +3,20 @@ const sequelize = require("./config/database");
 const rateLimit = require("express-rate-limit");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const cors = require("cors");
 
 dotenv.config();
 
+// ! package middleware 
 const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true
+  })
+);
 const port = process.env.PORT;
 
 // importing routes
@@ -38,6 +45,7 @@ const rateLimiter = rateLimit({
 
 app.use(rateLimiter);
 
+//! route middleware
 app.use("/role", roleRoute);
 app.use("/user", userRoute);
 app.use("/product-route", productRoute);

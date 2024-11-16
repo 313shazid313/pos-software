@@ -22,6 +22,7 @@ import TypeTable from './components/ui/product-additionals/TypeTable.jsx';
 import TypeForm from './components/ui/product-additionals/TypeForm.jsx';
 import UnitTable from './components/ui/product-additionals/UnitTable.jsx';
 import UnitForm from './components/ui/product-additionals/UnitForm.jsx';
+import NotFound404 from './components/ui/NotFound404.jsx';
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path :"*",
+    element : <NotFound404/>
+  }
 ]);
 
 
