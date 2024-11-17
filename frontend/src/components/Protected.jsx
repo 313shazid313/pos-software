@@ -4,7 +4,7 @@ import Login from "./ui/Login"
 
 const Protected = () => {
 
-  const isAdmin = false
+  const isAdmin = true
 
 
   return (

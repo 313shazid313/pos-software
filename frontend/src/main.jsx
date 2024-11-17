@@ -1,4 +1,5 @@
-import { StrictMode } from 'react'
+import store from "./redux/store.js";
+import { Provider } from "react-redux";
 import { createRoot } from 'react-dom/client'
 import './index.css'
 
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
         path: "users-table/user-form",
         element: <UserForm />
       },
-      
+
       {
         path: "roles-table",
         element: <RoleTable />
@@ -89,14 +90,14 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path :"*",
-    element : <NotFound404/>
+    path: "*",
+    element: <NotFound404 />
   }
 ]);
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </Provider>
 )
