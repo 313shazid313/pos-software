@@ -1,6 +1,35 @@
 import { Link } from "react-router-dom"
+import { useGetAllTypesQuery ,useDeleteaTypeMutation } from "../../../redux/product-additionals-state/typeApi";
+import Loading from "../../Loading";
+import Error404 from "../../Error404";
+
 
 const TypeTable = () => {
+  const { data, isError, isLoading, refetch } = useGetAllTypesQuery();
+
+  let serial = 0;
+
+  console.log(data)
+
+  const [deleteaType] = useDeleteaTypeMutation()
+
+  const handleOriginDelete = async (id) => {
+    try {
+      if (confirm("Sure You Want to Delete")) {
+        const response = await deleteaType(id).unwrap();
+        console.log(response)
+        refetch();
+      }
+    } catch (error) {
+      console.error("Failed to Delete", error);
+    }
+  }
+
+
+  if (isLoading) return <Loading />;
+  if (isError) return <Error404 />
+
+
   return (
     <div>
       <p className="text-2xl">Manage Type</p>
@@ -10,7 +39,6 @@ const TypeTable = () => {
             Add New Type
           </span>
         </Link>
-
       </div>
 
 
@@ -19,66 +47,36 @@ const TypeTable = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Product name
+                Id
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Category name
               </th>
               <th scope="col" className="px-6 py-3">
-                Category
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                Delete
               </th>
             </tr>
           </thead>
+
+
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17
-              </th>
-              <td className="px-6 py-4">
-                Silver
-              </td>
-              <td className="px-6 py-4">
-                Laptop
-              </td>
-              <td className="px-6 py-4">
-                $2999
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Microsoft Surface Pro
-              </th>
-              <td className="px-6 py-4">
-                White
-              </td>
-              <td className="px-6 py-4">
-                Laptop PC
-              </td>
-              <td className="px-6 py-4">
-                $1999
-              </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Magic Mouse 2
-              </th>
-              <td className="px-6 py-4">
-                Black
-              </td>
-              <td className="px-6 py-4">
-                Accessories
-              </td>
-              <td className="px-6 py-4">
-                $99
-              </td>
-            </tr>
+            {data?.map((item) => (
+              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={item.id}>
+                <td className="px-6 py-4">{serial = serial + 1}</td>
+                <td className="px-6 py-4">{item.TypeName}</td>
+                <td className="px-6 py-4">{item.description}</td>
+                <td className="px-6 py-4">
+                  <button onClick={() => { handleOriginDelete(item.id) }} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button></td>
+              </tr>
+            ))}
           </tbody>
+
+
         </table>
       </div>
-
     </div>
   )
 }
