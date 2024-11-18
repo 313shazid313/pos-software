@@ -4,13 +4,16 @@ import Login from "./ui/Login"
 
 const Protected = () => {
 
-  const isAdmin = true
+  // const isAdmin = false
 
+  const token = localStorage.getItem("token")
+
+  console.log(token);
 
   return (
 
-    <>{isAdmin ? <Navigation /> : <Login />}</>
-    
+    <>{token ? <Navigation /> : <Login />}</>
+
   )
 }
 

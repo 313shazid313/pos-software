@@ -20,6 +20,10 @@ const createProduct = async (req, res) => {
       ProductBrandId,
       ProductTypeId,
       ProductUnitId,
+      expiryDate,
+      sellType,
+      vat,
+      quantity
     } = req.body;
 
     const createAProduct = await Products.create({
@@ -34,6 +38,10 @@ const createProduct = async (req, res) => {
       ProductBrandId,
       ProductTypeId,
       ProductUnitId,
+      expiryDate,
+      sellType,
+      vat,
+      quantity
     });
 
     return res
@@ -69,6 +77,10 @@ const updateProduct = async (req, res) => {
       ProductBrandId,
       ProductTypeId,
       ProductUnitId,
+      expiryDate,
+      sellType,
+      vat,
+      quantity
     } = req.body;
 
     const updateData = {
@@ -83,6 +95,10 @@ const updateProduct = async (req, res) => {
       ProductBrandId,
       ProductTypeId,
       ProductUnitId,
+      expiryDate,
+      sellType,
+      vat,
+      quantity
     };
 
     await Products.update(updateData, { where: { id: id } });

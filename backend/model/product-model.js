@@ -32,6 +32,22 @@ const Products = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    expiryDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    sellType: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    vat: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     ProductCategoryId: {
       type: DataTypes.INTEGER,
       references: {

@@ -24,6 +24,8 @@ import TypeForm from './components/ui/product-additionals/TypeForm.jsx';
 import UnitTable from './components/ui/product-additionals/UnitTable.jsx';
 import UnitForm from './components/ui/product-additionals/UnitForm.jsx';
 import NotFound404 from './components/ui/NotFound404.jsx';
+import ProductForm from "./components/ui/ProductForm.jsx";
+import ProductTable from "./components/ui/ProductTable.jsx";
 
 const router = createBrowserRouter([
   {
@@ -87,17 +89,37 @@ const router = createBrowserRouter([
         path: "unit-table/unit-form",
         element: <UnitForm />
       },
+      {
+        path:"product-table",
+        element :<ProductTable/>
+      },
+      {
+        path:"product-table/product-form",
+        element :<ProductForm/>
+      }
     ]
   },
   {
     path: "*",
     element: <NotFound404 />
   }
-]);
+],
+  {
+    future: {
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_relativeSplatPath: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+);
 
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
+  <Provider store={store} >
+    <RouterProvider router={router} future={{
+      v7_startTransition: true,
+    }} />
   </Provider>
 )

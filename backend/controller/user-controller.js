@@ -84,12 +84,13 @@ const loginUser = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "None",
+    // });
 
+    
     return res.json({ message: "Login successful", token });
   } catch (error) {
     return res.status(500).json({
