@@ -20,7 +20,7 @@ const brandApi = createApi({
       }),
       providesTags: ["Brand"],
     }),
-    
+
     getAllBrands: builder.query({
       query: () => ({
         url: "/get-all-brands",
@@ -30,14 +30,14 @@ const brandApi = createApi({
     }),
 
     // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateBrand: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-brand/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Brand"],
+    }),
 
     // delete order
     deleteaBrand: builder.mutation({
@@ -54,6 +54,7 @@ export const {
   useCreateBrandMutation,
   useDeleteaBrandMutation,
   useGetAllBrandsQuery,
+  useUpdateBrandMutation,
 } = brandApi;
 
 export default brandApi;

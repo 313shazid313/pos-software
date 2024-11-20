@@ -29,17 +29,15 @@ const unitApi = createApi({
       providesTags: ["Unit"],
     }),
 
-    // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateUnit: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-unit/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Unit"],
+    }),
 
-    // delete order
     deleteanUnit: builder.mutation({
       query: (id) => ({
         url: `/delete-unit/${id}`,
@@ -54,6 +52,7 @@ export const {
   useCreateUnitMutation,
   useDeleteanUnitMutation,
   useGetAllUnitQuery,
+  useUpdateUnitMutation,
 } = unitApi;
 
 export default unitApi;

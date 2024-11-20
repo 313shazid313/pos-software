@@ -30,14 +30,14 @@ const originApi = createApi({
     }),
 
     // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateOrigin: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-origin/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Origin"],
+    }),
 
     // delete order
     deleteanOrigin: builder.mutation({
@@ -54,6 +54,7 @@ export const {
   useCreateOriginMutation,
   useDeleteanOriginMutation,
   useGetAllOriginQuery,
+  useUpdateOriginMutation
 } = originApi;
 
 export default originApi;

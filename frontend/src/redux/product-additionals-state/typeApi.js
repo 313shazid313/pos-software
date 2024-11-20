@@ -30,14 +30,14 @@ const typeApi = createApi({
     }),
 
     // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateType: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-type/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Types"],
+    }),
 
     // delete order
     deleteaType: builder.mutation({
@@ -54,6 +54,7 @@ export const {
   useCreateTypeMutation,
   useDeleteaTypeMutation,
   useGetAllTypesQuery,
+  useUpdateTypeMutation
 } = typeApi;
 
 export default typeApi;

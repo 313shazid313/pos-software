@@ -30,14 +30,14 @@ const categoryApi = createApi({
     }),
 
     // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateCategories: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-category/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Category"],
+    }),
 
     // delete order
     deleteaCategory: builder.mutation({
@@ -54,6 +54,7 @@ export const {
   useCreateCategoryMutation,
   useDeleteaCategoryMutation,
   useGetAllCategoriesQuery,
+  useUpdateCategoriesMutation
 } = categoryApi;
 
 export default categoryApi;
