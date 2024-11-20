@@ -171,9 +171,9 @@ const ProductForm = () => {
                     -----Select Category-----
                   </option>
                   {categoryData &&
-                    categoryData.map((categoryItem) => (
-                      <option key={categoryItem.id} value={categoryItem.id}>
-                        {categoryItem.categoryName}
+                    categoryData.map((Item) => (
+                      <option key={Item.id} value={Item.id}>
+                        {Item.categoryName}
                       </option>
                     ))}
                 </select>
@@ -199,9 +199,9 @@ const ProductForm = () => {
                     -----Select Brand-----
                   </option>
                   {brandData &&
-                    brandData.map((categoryItem) => (
-                      <option key={categoryItem.id} value={categoryItem.id}>
-                        {categoryItem.brandName}
+                    brandData.map((Item) => (
+                      <option key={Item.id} value={Item.id}>
+                        {Item.brandName}
                       </option>
                     ))}
                 </select>
@@ -227,9 +227,9 @@ const ProductForm = () => {
                     -----Select Type-----
                   </option>
                   {typeData &&
-                    typeData.map((categoryItem) => (
-                      <option key={categoryItem.id} value={categoryItem.id}>
-                        {categoryItem.TypeName}
+                    typeData.map((Item) => (
+                      <option key={Item.id} value={Item.id}>
+                        {Item.TypeName}
                       </option>
                     ))}
                 </select>
@@ -255,9 +255,9 @@ const ProductForm = () => {
                     -----Select Origin-----
                   </option>
                   {originData &&
-                    originData.map((categoryItem) => (
-                      <option key={categoryItem.id} value={categoryItem.id}>
-                        {categoryItem.originName}
+                    originData.map((Item) => (
+                      <option key={Item.id} value={Item.id}>
+                        {Item.originName}
                       </option>
                     ))}
                 </select>
@@ -272,9 +272,9 @@ const ProductForm = () => {
               </label>
               <div className="mt-2">
                 <select
-                  id="ProductTypeId"
-                  name="ProductTypeId"
-                  value={items.ProductTypeId}
+                  id="ProductUnitId"
+                  name="ProductUnitId"
+                  value={items.ProductUnitId}
                   onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600-600 sm:text-sm/6"
                 >
@@ -282,9 +282,9 @@ const ProductForm = () => {
                     -----Select Unit-----
                   </option>
                   {unitData &&
-                    unitData.map((categoryItem) => (
-                      <option key={categoryItem.id} value={categoryItem.id}>
-                        {categoryItem.UnitName}
+                    unitData.map((Item) => (
+                      <option key={Item.id} value={Item.id}>
+                        {Item.UnitName}
                       </option>
                     ))}
                 </select>
@@ -416,7 +416,7 @@ const ProductForm = () => {
               <div className="mt-3 space-y-6">
                 <div className="flex items-center gap-x-3">
                   <input
-                    id="vat"
+                    id="applicable"
                     name="vat"
                     value="applicable"
                     onChange={handleInputChange}
@@ -432,7 +432,7 @@ const ProductForm = () => {
                 </div>
                 <div className="flex items-center gap-x-3">
                   <input
-                    id="vat"
+                    id="not-applicable"
                     name="vat"
                     value="not-applicable"
                     onChange={handleInputChange}
@@ -458,7 +458,7 @@ const ProductForm = () => {
               <div className="mt-3 space-y-6">
                 <div className="flex items-center gap-x-3">
                   <input
-                    id="sell-type"
+                    id="general-sell"
                     name="sellType"
                     value="general-sell"
                     type="radio"
@@ -474,7 +474,7 @@ const ProductForm = () => {
                 </div>
                 <div className="flex items-center gap-x-3">
                   <input
-                    id="sell-type"
+                    id="corporate-sell"
                     name="sellType"
                     value="corporate-sell"
                     type="radio"
