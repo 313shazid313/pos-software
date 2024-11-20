@@ -96,4 +96,12 @@ ProductOrigin.hasOne(Products);
 ProductType.hasOne(Products);
 ProductUnit.hasOne(Products);
 
+Products.belongsTo(ProductCategory, { foreignKey: 'ProductCategoryId' });
+Products.belongsTo(ProductOrigin, { foreignKey: 'ProductOriginId' });
+Products.belongsTo(ProductBrand, { foreignKey: 'ProductBrandId' });
+Products.belongsTo(ProductType, { foreignKey: 'ProductTypeId' });
+Products.belongsTo(ProductUnit, { foreignKey: 'ProductUnitId' });
+
+
+
 module.exports = Products;

@@ -6,6 +6,7 @@ import categoryApi from "../redux/product-additionals-state/categoryApi";
 import unitApi from "./product-additionals-state/unitApi";
 import originApi from "./product-additionals-state/originApi";
 import typeApi from "./product-additionals-state/typeApi";
+import productApi from "./services/productsApi";
 
 export const store = configureStore({
   reducer: {
@@ -16,8 +17,9 @@ export const store = configureStore({
     [unitApi.reducerPath]: unitApi.reducer,
     [originApi.reducerPath]: originApi.reducer,
     [typeApi.reducerPath]: typeApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
   },
-  
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
@@ -25,7 +27,8 @@ export const store = configureStore({
       categoryApi.middleware,
       originApi.middleware,
       typeApi.middleware,
-      unitApi.middleware
+      unitApi.middleware,
+      productApi.middleware
     ),
 });
 

@@ -1,59 +1,60 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BaseUrl = "http://localhost:8000/product-route/brand/";
+const BaseUrl = "http://localhost:8000/product-route/product/";
 
-const brandApi = createApi({
-  reducerPath: "brandApi",
+const productApi = createApi({
+  reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BaseUrl,
     credentials: "include",
   }),
 
-  tagTypes: ["Brand"],
+  tagTypes: ["Product"],
 
   endpoints: (builder) => ({
-    createBrand: builder.mutation({
-      query: (newBrand) => ({
-        url: "/create-brand",
+    createProduct: builder.mutation({
+      query: (newProduct) => ({
+        url: "/create-product",
         method: "POST",
-        body: newBrand,
+        body: newProduct,
       }),
-      providesTags: ["Brand"],
+      providesTags: ["Product"],
     }),
-    
-    getAllBrands: builder.query({
+
+    getAllProducts: builder.query({
       query: () => ({
-        url: "/get-all-brands",
+        url: "/get-all-product",
         method: "GET",
       }),
-      providesTags: ["Brand"],
+      providesTags: ["Product"],
     }),
 
     // update order status
-    // updateOrderStatus: builder.mutation({
-    //   query: ({ id, status }) => ({
-    //     url: `/update-order-status/${id}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    updateProduct: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/update-product/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Product"],
+    }),
 
     // delete order
-    deleteaBrand: builder.mutation({
+    deleteaProduct: builder.mutation({
       query: (id) => ({
-        url: `/delete-brand/${id}`,
+        url: `/delete-product/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Brand", id }],
+      invalidatesTags: (result, error, id) => [{ type: "Product", id }],
     }),
   }),
 });
 
 export const {
-  useCreateBrandMutation,
-  useDeleteaBrandMutation,
-  useGetAllBrandsQuery,
-} = brandApi;
+  useCreateProductMutation,
+  useDeleteaProductMutation,
+  useGetAllProductsQuery,
+  useUpdateProductMutation,
+} = productApi;
 
-export default brandApi;
+export default productApi;

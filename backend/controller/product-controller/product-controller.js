@@ -1,10 +1,10 @@
 const Products = require("../../model/product-model");
 
-// const ProductBrand = require("../../model/product-additionals-model/product-brand-model");
-// const ProductCategory = require("../../model/product-additionals-model/product-category-model");
-// const ProductOrigin = require("../../model/product-additionals-model/product-origin-model");
-// const ProductType = require("../../model/product-additionals-model/product-type-model");
-// const ProductUnit = require("../../model/product-additionals-model/product-unit-model");
+const ProductBrand = require("../../model/product-additionals-model/product-brand-model");
+const ProductCategory = require("../../model/product-additionals-model/product-category-model");
+const ProductOrigin = require("../../model/product-additionals-model/product-origin-model");
+const ProductType = require("../../model/product-additionals-model/product-type-model");
+const ProductUnit = require("../../model/product-additionals-model/product-unit-model");
 
 const createProduct = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const createProduct = async (req, res) => {
       expiryDate,
       sellType,
       vat,
-      quantity
+      quantity,
     } = req.body;
 
     const createAProduct = await Products.create({
@@ -41,7 +41,7 @@ const createProduct = async (req, res) => {
       expiryDate,
       sellType,
       vat,
-      quantity
+      quantity,
     });
 
     return res
@@ -54,7 +54,15 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const allProducts = await Products.findAll();
+    const allProducts = await Products.findAll({
+      include: [
+        { model: ProductCategory, as: "ProductCategory" },
+        { model: ProductOrigin, as: "ProductOrigin" },
+        { model: ProductBrand, as: "ProductBrand" },
+        { model: ProductType, as: "ProductType" },
+        { model: ProductUnit, as: "ProductUnit" },
+      ],
+    });
 
     return res.status(201).json(allProducts);
   } catch (error) {
@@ -80,7 +88,7 @@ const updateProduct = async (req, res) => {
       expiryDate,
       sellType,
       vat,
-      quantity
+      quantity,
     } = req.body;
 
     const updateData = {
@@ -98,7 +106,7 @@ const updateProduct = async (req, res) => {
       expiryDate,
       sellType,
       vat,
-      quantity
+      quantity,
     };
 
     await Products.update(updateData, { where: { id: id } });
