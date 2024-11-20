@@ -35,4 +35,25 @@ const deleteAType = async (req, res) => {
   }
 };
 
-module.exports = { createProductType, getAllTypes, deleteAType };
+const updateType = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { TypeName, description } = req.body;
+
+    const updateData = {
+      TypeName,
+      description,
+    };
+
+    await ProductType.update(updateData, { where: { id: id } });
+
+    return res
+      .status(201)
+      .json({ message: "Type Update successful", updateData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createProductType, getAllTypes, deleteAType, updateType };

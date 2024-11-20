@@ -35,4 +35,27 @@ const deleteAOrigin = async (req, res) => {
   }
 };
 
-module.exports = { createProductOrigin, getAllOrigin, deleteAOrigin };
+
+const updateOrigin = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { originName, description } = req.body;
+
+    const updateData = {
+      originName,
+      description,
+    };
+
+    await ProductOrigin.update(updateData, { where: { id: id } });
+
+    return res
+      .status(201)
+      .json({ message: "Origin Update successful", updateData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+
+module.exports = { createProductOrigin, getAllOrigin, updateOrigin ,deleteAOrigin};

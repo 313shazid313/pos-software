@@ -34,4 +34,30 @@ const deleteACategory = async (req, res) => {
   }
 };
 
-module.exports = { createProductCategory, getAllCategory, deleteACategory };
+const updateCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { categoryName, description } = req.body;
+
+    const updateData = {
+      categoryName,
+      description,
+    };
+
+    await ProductCategory.update(updateData, { where: { id: id } });
+
+    return res
+      .status(201)
+      .json({ message: "Category Update successful", updateData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createProductCategory,
+  getAllCategory,
+  deleteACategory,
+  updateCategory,
+};

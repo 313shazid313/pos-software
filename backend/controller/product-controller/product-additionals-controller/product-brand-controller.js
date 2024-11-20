@@ -29,10 +29,35 @@ const deleteABrands = async (req, res) => {
     });
 
     return res.status(200).json({ message: "Delete Brand Successful" });
-
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = { createProductBrand, getAllBrands, deleteABrands };
+const updateBrand = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { brandName, description } = req.body;
+
+    const updateData = {
+      brandName,
+      description,
+    };
+
+    await ProductBrand.update(updateData, { where: { id: id } });
+
+    return res
+      .status(201)
+      .json({ message: "Brand Update successful", updateData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createProductBrand,
+  getAllBrands,
+  deleteABrands,
+  updateBrand,
+};

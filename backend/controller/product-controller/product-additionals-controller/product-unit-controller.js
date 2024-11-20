@@ -20,6 +20,8 @@ const getAllUnit = async (req, res) => {
   }
 };
 
+
+
 const deleteAnUnit = async (req, res) => {
   try {
     const { id } = req.params;
@@ -35,4 +37,25 @@ const deleteAnUnit = async (req, res) => {
   }
 };
 
-module.exports = { createProductUnit, getAllUnit, deleteAnUnit };
+const updateUnit = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { UnitName, description } = req.body;
+
+    const updateData = {
+      UnitName,
+      description,
+    };
+
+    await ProductUnit.update(updateData, { where: { id: id } });
+
+    return res
+      .status(201)
+      .json({ message: "Unit Update successful", updateData });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createProductUnit, getAllUnit, deleteAnUnit ,updateUnit};
