@@ -15,14 +15,15 @@ const Products = sequelize.define(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     specification: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     imageurl: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     price: {
       type: DataTypes.INTEGER,
@@ -33,15 +34,15 @@ const Products = sequelize.define(
       allowNull: false,
     },
     expiryDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
     sellType: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     vat: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     quantity: {
