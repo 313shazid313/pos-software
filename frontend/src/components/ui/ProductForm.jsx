@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { useNavigate } from "react-router-dom";
 
 import {
   ClassicEditor,
@@ -26,6 +27,12 @@ import { useGetAllCategoriesQuery } from "../../redux/product-additionals-state/
 import { useGetAllBrandsQuery } from "../../redux/product-additionals-state/brandApi";
 
 const ProductForm = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const { data: typeData } = useGetAllTypesQuery();
   const { data: unitData } = useGetAllUnitQuery();
   const { data: brandData } = useGetAllBrandsQuery();
@@ -551,12 +558,16 @@ const ProductForm = () => {
       </div>
       {/* submit button */}
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm/6 font-semibold text-gray-900">
+        <button
+          onClick={handleGoBack}
+          type="button"
+          className="text-sm/6 font-semibold text-gray-900"
+        >
           Cancel
         </button>
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Save
         </button>

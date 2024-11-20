@@ -51,6 +51,7 @@ const Products = sequelize.define(
     },
     ProductCategoryId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: ProductCategory,
         key: "id",
@@ -58,6 +59,7 @@ const Products = sequelize.define(
     },
     ProductOriginId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: ProductOrigin,
         key: "id",
@@ -65,6 +67,7 @@ const Products = sequelize.define(
     },
     ProductBrandId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: ProductBrand,
         key: "id",
@@ -72,13 +75,16 @@ const Products = sequelize.define(
     },
     ProductTypeId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: ProductType,
         key: "id",
       },
     },
+
     ProductUnitId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: ProductUnit,
         key: "id",

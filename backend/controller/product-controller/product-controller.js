@@ -64,7 +64,7 @@ const getAllProduct = async (req, res) => {
       ],
     });
 
-    return res.status(201).json(allProducts);
+    return res.status(200).json(allProducts);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -112,7 +112,7 @@ const updateProduct = async (req, res) => {
     await Products.update(updateData, { where: { id: id } });
 
     return res
-      .status(200)
+      .status(201)
       .json({ message: "Product Update successful", updateData });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -128,7 +128,7 @@ const deleteProduct = async (req, res) => {
       },
     });
 
-    return res.status(200).json({ message: "Delete Origin Successful" });
+    return res.status(201).json({ message: "Delete Origin Successful" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
