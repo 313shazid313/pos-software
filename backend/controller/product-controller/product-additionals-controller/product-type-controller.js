@@ -56,4 +56,20 @@ const updateType = async (req, res) => {
   }
 };
 
-module.exports = { createProductType, getAllTypes, deleteAType, updateType };
+const getAsingleType = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const aType = await ProductType.findOne({ where: { id: id } });
+    return res.status(200).json({ message: "success", aType });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createProductType,
+  getAllTypes,
+  deleteAType,
+  updateType,
+  getAsingleType,
+};

@@ -35,7 +35,6 @@ const deleteAOrigin = async (req, res) => {
   }
 };
 
-
 const updateOrigin = async (req, res) => {
   try {
     const { id } = req.params;
@@ -57,5 +56,20 @@ const updateOrigin = async (req, res) => {
   }
 };
 
+const getAsingleOrigin = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const anOrigin = await ProductOrigin.findOne({ where: { id: id } });
+    return res.status(200).json({ message: "success", anOrigin });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
-module.exports = { createProductOrigin, getAllOrigin, updateOrigin ,deleteAOrigin};
+module.exports = {
+  createProductOrigin,
+  getAllOrigin,
+  updateOrigin,
+  deleteAOrigin,
+  getAsingleOrigin,
+};

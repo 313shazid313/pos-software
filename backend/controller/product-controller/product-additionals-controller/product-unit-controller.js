@@ -20,8 +20,6 @@ const getAllUnit = async (req, res) => {
   }
 };
 
-
-
 const deleteAnUnit = async (req, res) => {
   try {
     const { id } = req.params;
@@ -58,4 +56,20 @@ const updateUnit = async (req, res) => {
   }
 };
 
-module.exports = { createProductUnit, getAllUnit, deleteAnUnit ,updateUnit};
+const getAsingleUnit = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const anUnit = await ProductUnit.findOne({ where: { id: id } });
+    return res.status(200).json({ message: "success", anUnit });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createProductUnit,
+  getAllUnit,
+  deleteAnUnit,
+  updateUnit,
+  getAsingleUnit,
+};

@@ -55,9 +55,20 @@ const updateBrand = async (req, res) => {
   }
 };
 
+const getAsingleBrand = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const aBrand = await ProductBrand.findOne({ where: { id: id } });
+    return res.status(200).json({ message: "success", aBrand });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createProductBrand,
   getAllBrands,
   deleteABrands,
   updateBrand,
+  getAsingleBrand
 };

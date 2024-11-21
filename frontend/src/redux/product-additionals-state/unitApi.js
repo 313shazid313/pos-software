@@ -38,6 +38,11 @@ const unitApi = createApi({
       invalidatesTags: ["Unit"],
     }),
 
+    singleUnit: builder.query({
+      query: (id) => `/single-unit/${id}`,
+      providesTags: (result, error, id) => [{ type: "Unit", id }],
+    }),
+
     deleteanUnit: builder.mutation({
       query: (id) => ({
         url: `/delete-unit/${id}`,
@@ -53,6 +58,7 @@ export const {
   useDeleteanUnitMutation,
   useGetAllUnitQuery,
   useUpdateUnitMutation,
+  useSingleUnitQuery,
 } = unitApi;
 
 export default unitApi;

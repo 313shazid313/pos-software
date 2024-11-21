@@ -39,6 +39,11 @@ const typeApi = createApi({
       invalidatesTags: ["Types"],
     }),
 
+    singleType: builder.query({
+      query: (id) => `/single-type/${id}`,
+      providesTags: (result, error, id) => [{ type: "Types", id }],
+    }),
+
     // delete order
     deleteaType: builder.mutation({
       query: (id) => ({
@@ -54,7 +59,8 @@ export const {
   useCreateTypeMutation,
   useDeleteaTypeMutation,
   useGetAllTypesQuery,
-  useUpdateTypeMutation
+  useUpdateTypeMutation,
+  useSingleTypeQuery
 } = typeApi;
 
 export default typeApi;

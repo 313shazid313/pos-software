@@ -1,11 +1,10 @@
-import Navigation from "./components/Navigation"
+
+
 
 
 const App = () => {
   return (
-    <div>
-      <Navigation/>
-    </div>
+    <div>App</div>
   )
 }
 

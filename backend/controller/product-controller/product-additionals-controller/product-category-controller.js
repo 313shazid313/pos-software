@@ -55,9 +55,20 @@ const updateCategory = async (req, res) => {
   }
 };
 
+const getAsingleCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const aCategory = await ProductCategory.findOne({ where: { id: id } });
+    return res.status(200).json({ message: "success", aCategory });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createProductCategory,
   getAllCategory,
   deleteACategory,
   updateCategory,
+  getAsingleCategory
 };

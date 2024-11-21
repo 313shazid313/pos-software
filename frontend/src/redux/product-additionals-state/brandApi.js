@@ -34,9 +34,14 @@ const brandApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-brand/${id}`,
         method: "PUT",
-        body: { status },
+        body: status,
       }),
       invalidatesTags: ["Brand"],
+    }),
+
+    singleBrand: builder.query({
+      query: (id) => `/single-brand/${id}`,
+      providesTags: (result, error, id) => [{ type: "Brand", id }],
     }),
 
     // delete order
@@ -55,6 +60,7 @@ export const {
   useDeleteaBrandMutation,
   useGetAllBrandsQuery,
   useUpdateBrandMutation,
+  useSingleBrandQuery,
 } = brandApi;
 
 export default brandApi;

@@ -39,6 +39,11 @@ const originApi = createApi({
       invalidatesTags: ["Origin"],
     }),
 
+    singleOrigin: builder.query({
+      query: (id) => `/single-origin/${id}`,
+      providesTags: (result, error, id) => [{ type: "Origin", id }],
+    }),
+
     // delete order
     deleteanOrigin: builder.mutation({
       query: (id) => ({
@@ -54,7 +59,8 @@ export const {
   useCreateOriginMutation,
   useDeleteanOriginMutation,
   useGetAllOriginQuery,
-  useUpdateOriginMutation
+  useUpdateOriginMutation,
+  useSingleOriginQuery,
 } = originApi;
 
 export default originApi;
