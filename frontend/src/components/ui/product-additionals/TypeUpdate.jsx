@@ -12,22 +12,22 @@ const TypeUpdate = () => {
 
   const { data, isLoading: isDataLoading, error } = useSingleTypeQuery(id);
   // console.log(data?.aCategory.originName);
-
+  console.log(data)
   const [updateType, { isLoading: isUpdating }] = useUpdateTypeMutation();
 
   const [element, setElement] = useState({
-    originName: "",
+    TypeName: "",
     description: "",
   });
 
   useEffect(() => {
-    if (data?.anOrigin) {
+    if (data?.aType) {
       setElement({
-        originName: data.anOrigin.originName || "",
-        description: data.anOrigin.description || "",
+        TypeName: data.aType.TypeName || "",
+        description: data.aType.description || "",
       });
     }
-  }, [data?.anOrigin]);
+  }, [data?.aType]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,8 +64,8 @@ const TypeUpdate = () => {
             </label>
             <input
               onChange={handleInputChange}
-              name="originName"
-              value={element.originName}
+              name="TypeName"
+              value={element.TypeName}
               required
               type="text"
               id="base-input"

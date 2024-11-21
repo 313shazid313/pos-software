@@ -13,19 +13,19 @@ const UnitTable = () => {
 
   console.log(data);
 
-  const [deleteanUnit] = useDeleteanUnitMutation();
+  // const [deleteanUnit] = useDeleteanUnitMutation();
 
-  const handleOriginDelete = async (id) => {
-    try {
-      if (confirm("Sure You Want to Delete")) {
-        const response = await deleteanUnit(id).unwrap();
-        console.log(response);
-        refetch();
-      }
-    } catch (error) {
-      console.error("Failed to Delete", error);
-    }
-  };
+  // const handleOriginDelete = async (id) => {
+  //   try {
+  //     if (confirm("Sure You Want to Delete")) {
+  //       const response = await deleteanUnit(id).unwrap();
+  //       console.log(response);
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to Delete", error);
+  //   }
+  // };
 
   if (isLoading) return <Loading />;
   if (isError) return <Error404 />;
@@ -72,7 +72,7 @@ const UnitTable = () => {
                 <td className="px-6 py-4">{(serial = serial + 1)}</td>
                 <td className="px-6 py-4">{item.UnitName}</td>
                 <td className="px-6 py-4">{item.description}</td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <button
                     onClick={() => {
                       handleOriginDelete(item.id);
@@ -82,6 +82,9 @@ const UnitTable = () => {
                   >
                     Delete
                   </button>
+                </td> */}
+                <td className="px-6 py-4">
+                  <Link to={`unit-update/${item.id}`}>Edit</Link>
                 </td>
               </tr>
             ))}
