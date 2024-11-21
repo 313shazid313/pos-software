@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { useNavigate } from "react-router-dom";
+import {
+  useCreateProductMutation,
+  useGetAllProductsQuery,
+} from "../../redux/services/productsApi";
 
 import {
   ClassicEditor,
@@ -27,6 +31,8 @@ import { useGetAllCategoriesQuery } from "../../redux/product-additionals-state/
 import { useGetAllBrandsQuery } from "../../redux/product-additionals-state/brandApi";
 
 const ProductForm = () => {
+  const { refetch } = useGetAllProductsQuery();
+  const [createProduct] = useCreateProductMutation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -71,9 +77,16 @@ const ProductForm = () => {
     });
   };
 
-  const handleProductSubmit = (event) => {
+  const handleProductSubmit = async (event) => {
     event.preventDefault();
-    console.log(items);
+    try {
+      await createProduct({ ...items }).unwrap();
+      refetch();
+      alert("Create New Category successful!");
+      navigate(-1);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
