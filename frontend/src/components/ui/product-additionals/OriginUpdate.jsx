@@ -31,10 +31,10 @@ const OriginUpdate = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setElement({
-      ...element,
-      [name]: value,
-    });
+    setElement((prevState) => ({
+      ...prevState,
+      [name]: value, // Update state with selected value
+    }));
   };
 
   const handleSubmit = async (e) => {

@@ -20,7 +20,7 @@ const ProductTable = () => {
 
   return (
     <div>
-      <p className="text-2xl">Manage Type</p>
+      <p className="text-2xl">Manage Products</p>
       <div className="flex justify-end">
         <Link
           to="product-form"
@@ -87,8 +87,8 @@ const ProductTable = () => {
                 <td className="px-6 py-4">{item.price}</td>
                 <td className="px-6 py-4">{item.ProductType?.TypeName}</td>
                 <td className="px-6 py-4">{item.ProductUnit?.UnitName}</td>
-                <td className="px-6 py-4">{item.vat && <>Applicable</>}</td>
-                <td className="px-6 py-4">{item.sellType && <>General</>}</td>
+                <td className="px-6 py-4">{item.vat}</td>
+                <td className="px-6 py-4">{item.sellType}</td>
                 <td className="px-6 py-4">
                   <button
                     onClick={() => {

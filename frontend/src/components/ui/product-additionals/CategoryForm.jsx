@@ -6,6 +6,9 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const CategoryForm = () => {
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const { refetch } = useGetAllCategoriesQuery();
   const navigate = useNavigate();
@@ -67,14 +70,19 @@ const CategoryForm = () => {
           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your thoughts here..."
         ></textarea>
-        <div className="pt-5">
+         <div className="mt-6 flex items-center justify-end gap-x-6">
+          <button
+            onClick={handleGoBack}
+            type="button"
+            className="text-sm/6 font-semibold text-gray-900"
+          >
+            Cancel
+          </button>
           <button
             type="submit"
-            className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+            className="rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Submit
-            </span>
+            Save
           </button>
         </div>
       </form>

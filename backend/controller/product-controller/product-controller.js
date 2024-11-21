@@ -70,6 +70,36 @@ const getAllProduct = async (req, res) => {
   }
 };
 
+const getaSingleProduct = async (req, res) => {
+  try {
+    // Extract the id from request parameters
+    const { id } = req.params;
+
+    // Fetch the product using Sequelize's findOne method
+    const singleProduct = await Products.findOne({
+      where: { id: id },
+      include: [
+        { model: ProductCategory, as: "ProductCategory" },
+        { model: ProductOrigin, as: "ProductOrigin" },
+        { model: ProductBrand, as: "ProductBrand" },
+        { model: ProductType, as: "ProductType" },
+        { model: ProductUnit, as: "ProductUnit" },
+      ],
+    });
+
+    // Check if the product exists
+    if (!singleProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Respond with the product data
+    res.status(200).json({ singleProduct });
+  } catch (error) {
+    // Handle errors
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -139,4 +169,5 @@ module.exports = {
   getAllProduct,
   updateProduct,
   deleteProduct,
+  getaSingleProduct,
 };

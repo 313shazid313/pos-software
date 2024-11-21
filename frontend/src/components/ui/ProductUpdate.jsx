@@ -13,6 +13,7 @@ import {
   Table,
   Undo,
 } from "ckeditor5";
+
 import { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -64,7 +65,7 @@ const ProductUpdate = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data?.singleProduct) {
       setItems((prevState) => ({
         ...prevState,
         name: data?.singleProduct.name || prevState.name,
