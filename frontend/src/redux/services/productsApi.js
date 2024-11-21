@@ -34,9 +34,14 @@ const productApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-product/${id}`,
         method: "PUT",
-        body: { status },
+        body:  status ,
       }),
       invalidatesTags: ["Product"],
+    }),
+
+    singleProduct: builder.query({
+      query: (id) => `/single-product/${id}`,
+      providesTags: (result, error, id) => [{ type: "Product", id }],
     }),
 
     // delete order
@@ -55,6 +60,7 @@ export const {
   useDeleteaProductMutation,
   useGetAllProductsQuery,
   useUpdateProductMutation,
+  useSingleProductQuery,
 } = productApi;
 
 export default productApi;

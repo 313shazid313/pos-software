@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
-import { useGetAllProductsQuery } from "../../redux/services/productsApi";
+import {
+  useGetAllProductsQuery,
+  useDeleteaProductMutation,
+} from "../../redux/services/productsApi";
 
 const ProductTable = () => {
   let serial = 0;
-  const { data } = useGetAllProductsQuery();
+  const { data, refetch } = useGetAllProductsQuery();
 
   console.log(data);
 
-  const handleProductDelete = () => {};
+  const handleProductDelete = (e) => {
+    console.log(e);
+    deleteaProduct(e);
+    refetch();
+  };
+
+  const [deleteaProduct] = useDeleteaProductMutation();
 
   return (
     <div>
@@ -57,6 +66,9 @@ const ProductTable = () => {
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
             </tr>
           </thead>
 
@@ -86,6 +98,9 @@ const ProductTable = () => {
                   >
                     Delete
                   </button>
+                </td>
+                <td className="px-6 py-4">
+                  <Link to={`product-update/${item.id}`}>Edit</Link>
                 </td>
               </tr>
             ))}

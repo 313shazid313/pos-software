@@ -29,6 +29,7 @@ import OriginUpdate from "./components/ui/product-additionals/OriginUpdate.jsx";
 import BrandUpdate from "./components/ui/product-additionals/BrandUpdate.jsx";
 import UnitUpdate from "./components/ui/product-additionals/UnitUpdate.jsx";
 import TypeUpdate from "./components/ui/product-additionals/TypeUpdate.jsx";
+import ProductUpdate from "./components/ui/ProductUpdate.jsx";
 
 const router = createBrowserRouter(
   [
@@ -54,7 +55,6 @@ const router = createBrowserRouter(
           element: <RoleForm />,
         },
 
-
         {
           path: "category-table",
           element: <CategoryTable />,
@@ -67,7 +67,6 @@ const router = createBrowserRouter(
           path: "category-table/category-update/:id",
           element: <CategoryUpdate />,
         },
-
 
         {
           path: "origin-table",
@@ -82,8 +81,6 @@ const router = createBrowserRouter(
           element: <OriginUpdate />,
         },
 
-
-
         {
           path: "brand-table",
           element: <BrandTable />,
@@ -96,8 +93,6 @@ const router = createBrowserRouter(
           path: "brand-table/brand-update/:id",
           element: <BrandUpdate />,
         },
-
-
 
         {
           path: "type-table",
@@ -112,8 +107,6 @@ const router = createBrowserRouter(
           element: <TypeUpdate />,
         },
 
-
-
         {
           path: "unit-table",
           element: <UnitTable />,
@@ -127,8 +120,6 @@ const router = createBrowserRouter(
           element: <UnitUpdate />,
         },
 
-
-        
         {
           path: "product-table",
           element: <ProductTable />,
@@ -136,6 +127,10 @@ const router = createBrowserRouter(
         {
           path: "product-table/product-form",
           element: <ProductForm />,
+        },
+        {
+          path: "product-table/product-update/:id",
+          element: <ProductUpdate />,
         },
       ],
     },
