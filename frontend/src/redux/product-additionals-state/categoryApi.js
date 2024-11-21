@@ -34,7 +34,7 @@ const categoryApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-category/${id}`,
         method: "PUT",
-        body: { status },
+        body: status,
       }),
       invalidatesTags: ["Category"],
     }),
@@ -43,7 +43,6 @@ const categoryApi = createApi({
       query: (id) => `/single-category/${id}`,
       providesTags: (result, error, id) => [{ type: "Category", id }],
     }),
-
 
     // delete order
     deleteaCategory: builder.mutation({
@@ -61,7 +60,7 @@ export const {
   useDeleteaCategoryMutation,
   useGetAllCategoriesQuery,
   useUpdateCategoriesMutation,
-  useSingleCategoryQuery
+  useSingleCategoryQuery,
 } = categoryApi;
 
 export default categoryApi;

@@ -34,7 +34,7 @@ const typeApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-type/${id}`,
         method: "PUT",
-        body: { status },
+        body:  status ,
       }),
       invalidatesTags: ["Types"],
     }),

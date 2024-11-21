@@ -33,7 +33,7 @@ const unitApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-unit/${id}`,
         method: "PUT",
-        body: { status },
+        body: status,
       }),
       invalidatesTags: ["Unit"],
     }),

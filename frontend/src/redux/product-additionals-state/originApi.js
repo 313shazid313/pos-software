@@ -34,7 +34,7 @@ const originApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-origin/${id}`,
         method: "PUT",
-        body: { status },
+        body:  status ,
       }),
       invalidatesTags: ["Origin"],
     }),

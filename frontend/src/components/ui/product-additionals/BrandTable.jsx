@@ -7,23 +7,23 @@ import Loading from "../../Loading";
 import Error404 from "../../Error404";
 
 const BrandTable = () => {
-  const { data, isError, isLoading, refetch } = useGetAllBrandsQuery();
-  const [deleteaBrand] = useDeleteaBrandMutation();
+  const { data, isError, isLoading } = useGetAllBrandsQuery();
+  // const [deleteaBrand] = useDeleteaBrandMutation();
   let serial = 0;
 
   console.log(data);
 
-  const handleBrandDelete = async (id) => {
-    try {
-      if (confirm("Sure You Want to Delete")) {
-        const response = await deleteaBrand(id).unwrap();
-        console.log(response);
-        refetch();
-      }
-    } catch (error) {
-      console.error("Failed to delete user", error);
-    }
-  };
+  // const handleBrandDelete = async (id) => {
+  //   try {
+  //     if (confirm("Sure You Want to Delete")) {
+  //       const response = await deleteaBrand(id).unwrap();
+  //       console.log(response);
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to delete user", error);
+  //   }
+  // };
 
   if (isLoading) return <Loading />;
   if (isError) return <Error404 />;
@@ -55,11 +55,11 @@ const BrandTable = () => {
               <th scope="col" className="px-6 py-3">
                 Description
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Delete
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
-                Delete
+                Edit
               </th>
             </tr>
           </thead>
@@ -72,7 +72,7 @@ const BrandTable = () => {
                 <td className="px-6 py-4">{(serial = serial + 1)}</td>
                 <td className="px-6 py-4">{item.brandName}</td>
                 <td className="px-6 py-4">{item.description}</td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <button
                     onClick={() => {
                       handleBrandDelete(item.id);
@@ -82,7 +82,7 @@ const BrandTable = () => {
                   >
                     Delete
                   </button>
-                </td>
+                </td> */}
                 <td className="px-6 py-4">
                   <Link to={`brand-update/${item.id}`}>Edit</Link>{" "}
                 </td>

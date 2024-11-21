@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const CategoryTable = () => {
   const navigate = useNavigate();
-  const { data, isError, isLoading, refetch } = useGetAllCategoriesQuery();
+  const { data, isError, isLoading } = useGetAllCategoriesQuery();
 
   let serial = 0;
 
@@ -19,22 +19,26 @@ const CategoryTable = () => {
 
   const [deleteaCategory] = useDeleteaCategoryMutation();
 
-  const handleCategoryDelete = async (id) => {
-    try {
-      if (confirm("Sure You Want to Delete")) {
-        const response = await deleteaCategory(id).unwrap();
-        console.log(response);
-        refetch();
-      }
-    } catch (error) {
-      console.error("Failed to delete user", error);
-    }
-  };
+  // const handleCategoryDelete = async (id) => {
+  //   try {
+  //     if (confirm("Sure You Want to Delete")) {
+  //       const response = await deleteaCategory(id).unwrap();
+  //       console.log(response);
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to delete user", error);
+  //   }
+  // };
 
-  const handleCategoryEdit = (data) => {
-    console.log(data);
-    navigate("category-form");
-  };
+  // const handleCategoryEdit = (data) => {
+  //   console.log(data);
+  //   navigate("category-form");
+  // };
+
+  
+
+
 
   if (isLoading) return <Loading />;
   if (isError) return <Error404 />;
@@ -81,7 +85,7 @@ const CategoryTable = () => {
                 <td className="px-6 py-4">{(serial = serial + 1)}</td>
                 <td className="px-6 py-4">{item.categoryName}</td>
                 <td className="px-6 py-4">{item.description}</td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <button
                     onClick={() => {
                       handleCategoryDelete(item.id);
@@ -91,17 +95,9 @@ const CategoryTable = () => {
                   >
                     Delete
                   </button>
-                </td>
+                </td> */}
                 <td className="px-6 py-4">
-                  <button
-                    onClick={() => {
-                      handleCategoryEdit(item);
-                    }}
-                    type="button"
-                    className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                  >
-                    Edit
-                  </button>
+                  <Link to={`category-update/${item.id}`}>Edit</Link>
                 </td>
               </tr>
             ))}
