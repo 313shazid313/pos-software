@@ -11,7 +11,9 @@ const createProductCategory = async (req, res) => {
 };
 const getAllCategory = async (req, res) => {
   try {
-    const allBrands = await ProductCategory.findAll();
+    const allBrands = await ProductCategory.findAll({
+      order: [["id", "ASC"]], 
+    });
 
     return res.status(201).json(allBrands);
   } catch (error) {
@@ -70,5 +72,5 @@ module.exports = {
   getAllCategory,
   deleteACategory,
   updateCategory,
-  getAsingleCategory
+  getAsingleCategory,
 };

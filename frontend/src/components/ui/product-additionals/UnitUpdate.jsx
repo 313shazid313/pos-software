@@ -33,7 +33,7 @@ const UnitUpdate = () => {
     const { name, value } = e.target;
     setElement((prevState) => ({
       ...prevState,
-      [name]: value, // Update state with selected value
+      [name]: value, 
     }));
   };
 

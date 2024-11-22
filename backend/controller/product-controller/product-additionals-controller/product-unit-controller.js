@@ -12,7 +12,9 @@ const createProductUnit = async (req, res) => {
 
 const getAllUnit = async (req, res) => {
   try {
-    const allBrands = await ProductUnit.findAll();
+    const allBrands = await ProductUnit.findAll({
+      order: [["id", "ASC"]],
+    });
 
     return res.status(201).json(allBrands);
   } catch (error) {

@@ -11,7 +11,9 @@ const createProductBrand = async (req, res) => {
 };
 const getAllBrands = async (req, res) => {
   try {
-    const allBrands = await ProductBrand.findAll();
+    const allBrands = await ProductBrand.findAll({
+      order: [["id", "ASC"]],
+    });
 
     return res.status(201).json(allBrands);
   } catch (error) {
@@ -70,5 +72,5 @@ module.exports = {
   getAllBrands,
   deleteABrands,
   updateBrand,
-  getAsingleBrand
+  getAsingleBrand,
 };

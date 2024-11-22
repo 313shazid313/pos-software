@@ -78,7 +78,6 @@ const loginUser = async (req, res) => {
     };
     // console.log(payloadData);
 
-
     //! making token ---------->
     const token = jwt.sign(payloadData, process.env.JWT_SECRET, {
       expiresIn: "1h",
@@ -90,7 +89,6 @@ const loginUser = async (req, res) => {
     //   sameSite: "None",
     // });
 
-    
     return res.json({ message: "Login successful", token });
   } catch (error) {
     return res.status(500).json({
@@ -102,7 +100,9 @@ const loginUser = async (req, res) => {
 
 const getAllUser = async (req, res) => {
   try {
-    const allUser = await User.findAll();
+    const allUser = await User.findAll({
+      order: [["id", "ASC"]], 
+    });
     return res.json({ message: "getting all users", allUser });
   } catch (error) {
     return res.status(500).json({

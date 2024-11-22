@@ -12,7 +12,9 @@ const createProductOrigin = async (req, res) => {
 
 const getAllOrigin = async (req, res) => {
   try {
-    const allBrands = await ProductOrigin.findAll();
+    const allBrands = await ProductOrigin.findAll({
+      order: [["id", "ASC"]], 
+    });
 
     return res.status(201).json(allBrands);
   } catch (error) {

@@ -12,7 +12,9 @@ const createProductType = async (req, res) => {
 
 const getAllTypes = async (req, res) => {
   try {
-    const allBrands = await ProductType.findAll();
+    const allBrands = await ProductType.findAll({
+      order: [["id", "ASC"]], 
+    });
 
     return res.status(201).json(allBrands);
   } catch (error) {

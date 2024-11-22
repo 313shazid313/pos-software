@@ -23,7 +23,9 @@ const createSupplier = async (req, res) => {
 
 const getAllSupplier = async (req, res) => {
   try {
-    const allSupplier = await Supplier.findAll();
+    const allSupplier = await Supplier.findAll({
+      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+    });
 
     return res.status(200).json({ message: "All suppliers", allSupplier });
   } catch (error) {

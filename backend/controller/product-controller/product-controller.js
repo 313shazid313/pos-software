@@ -54,15 +54,20 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const allProducts = await Products.findAll({
-      include: [
-        { model: ProductCategory, as: "ProductCategory" },
-        { model: ProductOrigin, as: "ProductOrigin" },
-        { model: ProductBrand, as: "ProductBrand" },
-        { model: ProductType, as: "ProductType" },
-        { model: ProductUnit, as: "ProductUnit" },
-      ],
-    });
+    const allProducts = await Products.findAll(
+      {
+        include: [
+          { model: ProductCategory, as: "ProductCategory" },
+          { model: ProductOrigin, as: "ProductOrigin" },
+          { model: ProductBrand, as: "ProductBrand" },
+          { model: ProductType, as: "ProductType" },
+          { model: ProductUnit, as: "ProductUnit" },
+        ],
+      },
+      {
+        order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+      }
+    );
 
     return res.status(200).json(allProducts);
   } catch (error) {

@@ -36,7 +36,9 @@ const createRole = async (req, res) => {
 const getAllRole = async (req, res) => {
   try {
     const allRole = await Role.findAll();
-    const allPermissions = await ProductRolePermission.findAll();
+    const allPermissions = await ProductRolePermission.findAll({
+      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+    });
 
     return res.status(200).json({
       message: "Getting all role and permissions",
@@ -82,13 +84,11 @@ const updateRole = async (req, res) => {
       where: { id: id },
     });
 
-    return res
-      .status(200)
-      .json({
-        message: "Update Role successful",
-        updateRoleData,
-        updateProductPermissionData,
-      });
+    return res.status(200).json({
+      message: "Update Role successful",
+      updateRoleData,
+      updateProductPermissionData,
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
