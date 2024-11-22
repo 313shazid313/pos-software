@@ -32,7 +32,7 @@ const OriginTable = () => {
 
   return (
     <div>
-      <p className="text-2xl">Manage Origin</p>
+      <p className="text-2xl font-bold mb-6">Manage Origin</p>
       <div className="flex justify-end">
         <Link
           to="origin-form"

@@ -98,7 +98,7 @@ const ProductUpdate = () => {
     console.log(items);
     try {
       await updateProduct({ id: id, status: items }).unwrap();
-      alert("Categories updated successfully!");
+      alert("Product updated successfully!");
       navigate(-1);
     } catch (err) {
       console.error("Failed to update Category:", err);

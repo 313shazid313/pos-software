@@ -32,7 +32,7 @@ const UnitTable = () => {
 
   return (
     <div>
-      <p className="text-2xl">Manage Unit</p>
+      <p className="text-2xl font-bold mb-6">Manage Unit</p>
       <div className="flex justify-end">
         <Link
           to="unit-form"

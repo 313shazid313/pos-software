@@ -30,7 +30,7 @@ const BrandTable = () => {
 
   return (
     <div>
-      <p className="text-2xl">Manage Brand</p>
+      <p className="text-2xl font-bold mb-6">Manage Brand</p>
       <div className="flex justify-end">
         <Link
           to="brand-form"

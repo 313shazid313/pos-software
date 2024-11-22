@@ -32,7 +32,7 @@ const TypeTable = () => {
 
   return (
     <div>
-      <p className="text-2xl">Manage Type</p>
+      <p className="text-2xl font-bold mb-6">Manage Type</p>
       <div className="flex justify-end">
         <Link
           to="type-form"

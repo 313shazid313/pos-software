@@ -39,7 +39,7 @@ const BrandForm = () => {
 
   return (
     <div>
-      <p className="text-2xl">Add New Brand</p>
+      <p className="text-2xl font-bold mb-6">Add New Brand</p>
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto pt-16">
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
