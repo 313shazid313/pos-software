@@ -22,10 +22,7 @@ const productApi = createApi({
     }),
 
     getAllProducts: builder.query({
-      query: () => ({
-        url: "/get-all-product",
-        method: "GET",
-      }),
+      query: ({ page }) => `/get-all-product?page=${page}`,
       providesTags: ["Product"],
     }),
 
@@ -34,7 +31,7 @@ const productApi = createApi({
       query: ({ id, status }) => ({
         url: `/update-product/${id}`,
         method: "PUT",
-        body:  status ,
+        body: status,
       }),
       invalidatesTags: ["Product"],
     }),

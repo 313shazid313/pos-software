@@ -58,23 +58,18 @@ const getAllProduct = async (req, res) => {
     const page = parseInt(req.query.page || "0");
     const totalAmountInDatabase = await Products.count();
 
-    const allProducts = await Products.findAll(
-      {
-        include: [
-          { model: ProductCategory, as: "ProductCategory" },
-          { model: ProductOrigin, as: "ProductOrigin" },
-          { model: ProductBrand, as: "ProductBrand" },
-          { model: ProductType, as: "ProductType" },
-          { model: ProductUnit, as: "ProductUnit" },
-        ],
-      },
-      //for pagination
-      {
-        order: [["id", "ASC"]], // Sorting by 'id' in ascending order
-      },
-      { limit: nunberOfContent, offset: nunberOfContent * page }
-      //for pagination
-    );
+    const allProducts = await Products.findAll({
+      include: [
+        { model: ProductCategory, as: "ProductCategory" },
+        { model: ProductOrigin, as: "ProductOrigin" },
+        { model: ProductBrand, as: "ProductBrand" },
+        { model: ProductType, as: "ProductType" },
+        { model: ProductUnit, as: "ProductUnit" },
+      ],
+      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+      limit: nunberOfContent, // Pagination limit
+      offset: nunberOfContent * page, // Pagination offset
+    });
 
     return res.status(200).json({
       allProducts,

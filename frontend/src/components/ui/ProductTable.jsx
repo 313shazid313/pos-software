@@ -6,12 +6,13 @@ import {
 } from "../../redux/services/productsApi";
 
 const ProductTable = () => {
+  // ? hooks for pagination ------->
   const [products, setProducts] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
-  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+  // ? hooks for pagination ------->
 
-  const { data, refetch } = useGetAllProductsQuery();
+  const { data, refetch } = useGetAllProductsQuery({ page: pageNumber });
   const [deleteaProduct] = useDeleteaProductMutation();
 
   const handleProductDelete = async (productId) => {
@@ -22,6 +23,9 @@ const ProductTable = () => {
       console.error("Failed to delete the product:", error);
     }
   };
+
+  // ?pagination ------->
+  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   const gotoPrevious = () => {
     setPageNumber((prev) => Math.max(0, prev - 1));
@@ -37,7 +41,7 @@ const ProductTable = () => {
       setProducts(data?.allProducts || 0);
     }
   }, [data]);
-
+  //? pagination------>
   return (
     <div>
       <p className="text-2xl">Manage Products</p>
