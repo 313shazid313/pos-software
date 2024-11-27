@@ -54,24 +54,29 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const allProducts = await Products.findAll(
-      {
-        include: [
-          { model: ProductCategory, as: "ProductCategory" },
-          { model: ProductOrigin, as: "ProductOrigin" },
-          { model: ProductBrand, as: "ProductBrand" },
-          { model: ProductType, as: "ProductType" },
-          { model: ProductUnit, as: "ProductUnit" },
-        ],
-      },
-      {
-        order: [["id", "ASC"]], // Sorting by 'id' in ascending order
-      }
-    );
+    const numberOfContent = 5; // Corrected variable name
+    const page = parseInt(req.query.page || "0");
+    const totalAmountInDatabase = await Products.count(); // Get the total count of products
 
-    return res.status(200).json(allProducts);
+    const allProducts = await Products.findAll({
+      include: [
+        { model: ProductCategory, as: "ProductCategory" },
+        { model: ProductOrigin, as: "ProductOrigin" },
+        { model: ProductBrand, as: "ProductBrand" },
+        { model: ProductType, as: "ProductType" },
+        { model: ProductUnit, as: "ProductUnit" },
+      ],
+      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+      offset: numberOfContent * page, // Pagination offset
+      limit: numberOfContent, // Pagination limit
+    });
+
+    return res.status(200).json({
+      allProducts,
+      totalPage: Math.ceil(totalAmountInDatabase / numberOfContent), // Total number of pages
+    });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message }); // Return error response
   }
 };
 

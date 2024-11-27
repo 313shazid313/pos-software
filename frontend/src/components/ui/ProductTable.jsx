@@ -1,22 +1,42 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   useGetAllProductsQuery,
   useDeleteaProductMutation,
 } from "../../redux/services/productsApi";
 
 const ProductTable = () => {
-  let serial = 0;
+  const [products, setProducts] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+
   const { data, refetch } = useGetAllProductsQuery();
+  const [deleteaProduct] = useDeleteaProductMutation();
 
-  console.log(data);
-
-  const handleProductDelete = (e) => {
-    console.log(e);
-    deleteaProduct(e);
-    refetch();
+  const handleProductDelete = async (productId) => {
+    try {
+      await deleteaProduct(productId);
+      refetch();
+    } catch (error) {
+      console.error("Failed to delete the product:", error);
+    }
   };
 
-  const [deleteaProduct] = useDeleteaProductMutation();
+  const gotoPrevious = () => {
+    setPageNumber((prev) => Math.max(0, prev - 1));
+  };
+
+  const gotoNext = () => {
+    setPageNumber((prev) => Math.min(numberOfPages - 1, prev + 1));
+  };
+
+  useEffect(() => {
+    if (data) {
+      setNumberOfPages(data?.totalPage || 0);
+      setProducts(data?.allProducts || 0);
+    }
+  }, [data]);
 
   return (
     <div>
@@ -58,27 +78,24 @@ const ProductTable = () => {
                 Unit
               </th>
               <th scope="col" className="px-6 py-3">
-                vat
+                VAT
               </th>
               <th scope="col" className="px-6 py-3">
                 Sell Type
               </th>
               <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
+                Actions
               </th>
             </tr>
           </thead>
 
           <tbody>
-            {data?.map((item) => (
+            {products?.map((item, index) => (
               <tr
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                 key={item.id}
               >
-                <td className="px-6 py-4">{(serial = serial + 1)}</td>
+                <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.ProductBrand?.brandName}</td>
                 <td className="px-6 py-4">
@@ -89,23 +106,66 @@ const ProductTable = () => {
                 <td className="px-6 py-4">{item.ProductUnit?.UnitName}</td>
                 <td className="px-6 py-4">{item.vat}</td>
                 <td className="px-6 py-4">{item.sellType}</td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 flex space-x-2">
                   <button
-                    onClick={() => {
-                      handleProductDelete(item.id);
-                    }}
-                    type="button"
+                    onClick={() => handleProductDelete(item.id)}
+                    className="px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600"
                   >
                     Delete
                   </button>
-                </td>
-                <td className="px-6 py-4">
-                  <Link to={`product-update/${item.id}`}>Edit</Link>
+                  <Link
+                    to={`product-update/${item.id}`}
+                    className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  >
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-between mt-6">
+        <button
+          onClick={gotoPrevious}
+          disabled={pageNumber === 0}
+          className={`px-4 py-2 rounded-lg ${
+            pageNumber === 0
+              ? "bg-gray-300 text-gray-600"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          Previous
+        </button>
+
+        <div className="flex space-x-2">
+          {pages.map((pageIndex) => (
+            <button
+              key={pageIndex}
+              onClick={() => setPageNumber(pageIndex)}
+              className={`px-4 py-2 ${
+                pageIndex === pageNumber
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              } rounded-lg`}
+            >
+              {pageIndex + 1}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={gotoNext}
+          disabled={pageNumber >= numberOfPages - 1}
+          className={`px-4 py-2 rounded-lg ${
+            pageNumber >= numberOfPages - 1
+              ? "bg-gray-300 text-gray-600"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
