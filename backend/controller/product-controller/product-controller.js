@@ -54,29 +54,34 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const numberOfContent = 5; // Corrected variable name
+    const nunberOfContent = 5;
     const page = parseInt(req.query.page || "0");
-    const totalAmountInDatabase = await Products.count(); // Get the total count of products
+    const totalAmountInDatabase = await Products.count();
 
-    const allProducts = await Products.findAll({
-      include: [
-        { model: ProductCategory, as: "ProductCategory" },
-        { model: ProductOrigin, as: "ProductOrigin" },
-        { model: ProductBrand, as: "ProductBrand" },
-        { model: ProductType, as: "ProductType" },
-        { model: ProductUnit, as: "ProductUnit" },
-      ],
-      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
-      offset: numberOfContent * page, // Pagination offset
-      limit: numberOfContent, // Pagination limit
-    });
+    const allProducts = await Products.findAll(
+      {
+        include: [
+          { model: ProductCategory, as: "ProductCategory" },
+          { model: ProductOrigin, as: "ProductOrigin" },
+          { model: ProductBrand, as: "ProductBrand" },
+          { model: ProductType, as: "ProductType" },
+          { model: ProductUnit, as: "ProductUnit" },
+        ],
+      },
+      //for pagination
+      {
+        order: [["id", "ASC"]], // Sorting by 'id' in ascending order
+      },
+      { limit: nunberOfContent, offset: nunberOfContent * page }
+      //for pagination
+    );
 
     return res.status(200).json({
       allProducts,
-      totalPage: Math.ceil(totalAmountInDatabase / numberOfContent), // Total number of pages
+      totalPage: Math.ceil(totalAmountInDatabase / nunberOfContent),
     });
   } catch (error) {
-    return res.status(500).json({ error: error.message }); // Return error response
+    return res.status(500).json({ error: error.message });
   }
 };
 
