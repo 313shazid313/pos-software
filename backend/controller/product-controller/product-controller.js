@@ -54,9 +54,12 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
+    // pagination ------->
     const nunberOfContent = 5;
     const page = parseInt(req.query.page || "0");
     const totalAmountInDatabase = await Products.count();
+    // search -------->
+    const searchQuery = req.query.search || "";
 
     const allProducts = await Products.findAll({
       include: [
@@ -66,9 +69,12 @@ const getAllProduct = async (req, res) => {
         { model: ProductType, as: "ProductType" },
         { model: ProductUnit, as: "ProductUnit" },
       ],
-      order: [["id", "ASC"]], // Sorting by 'id' in ascending order
-      limit: nunberOfContent, // Pagination limit
-      offset: nunberOfContent * page, // Pagination offset
+      order: [["id", "ASC"]],
+      limit: nunberOfContent,
+      offset: nunberOfContent * page,
+      // where: {
+      //   name: { [Sequelize.Op.like]: `%${searchQuery}%` },
+      // },
     });
 
     return res.status(200).json({
@@ -82,10 +88,8 @@ const getAllProduct = async (req, res) => {
 
 const getaSingleProduct = async (req, res) => {
   try {
-    // Extract the id from request parameters
     const { id } = req.params;
 
-    // Fetch the product using Sequelize's findOne method
     const singleProduct = await Products.findOne({
       where: { id: id },
       include: [
@@ -97,15 +101,12 @@ const getaSingleProduct = async (req, res) => {
       ],
     });
 
-    // Check if the product exists
     if (!singleProduct) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Respond with the product data
     res.status(200).json({ singleProduct });
   } catch (error) {
-    // Handle errors
     return res.status(500).json({ error: error.message });
   }
 };

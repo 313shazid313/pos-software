@@ -21,6 +21,8 @@ const productApi = createApi({
       providesTags: ["Product"],
     }),
 
+
+
     getAllProducts: builder.query({
       query: ({ page }) => `/get-all-product?page=${page}`,
       providesTags: ["Product"],
