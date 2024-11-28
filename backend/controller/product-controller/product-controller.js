@@ -177,11 +177,19 @@ const deleteProduct = async (req, res) => {
 
 const searchProducts = async (req, res) => {
   const { query } = req.query;
+  console.log(query);
   try {
     const searchedItem = await Products.findAll({
       where: {
         name: { [Op.iLike]: `%${query}%` },
       },
+      include: [
+        { model: ProductCategory, as: "ProductCategory" },
+        { model: ProductOrigin, as: "ProductOrigin" },
+        { model: ProductBrand, as: "ProductBrand" },
+        { model: ProductType, as: "ProductType" },
+        { model: ProductUnit, as: "ProductUnit" },
+      ],
     });
     return res.status(200).json({ searchedItem });
   } catch (error) {
