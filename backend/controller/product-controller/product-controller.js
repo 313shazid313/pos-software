@@ -1,5 +1,5 @@
 const Products = require("../../model/product-model");
-
+const { Op } = require("sequelize");
 const ProductBrand = require("../../model/product-additionals-model/product-brand-model");
 const ProductCategory = require("../../model/product-additionals-model/product-category-model");
 const ProductOrigin = require("../../model/product-additionals-model/product-origin-model");
@@ -112,8 +112,8 @@ const getaSingleProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const {
       name,
       description,
@@ -161,8 +161,8 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     await Products.destroy({
       where: {
         id: id,
@@ -175,10 +175,25 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const searchedItem = await Products.findAll({
+      where: {
+        name: { [Op.iLike]: `%${query}%` },
+      },
+    });
+    return res.status(200).json({ searchedItem });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createProduct,
   getAllProduct,
   updateProduct,
   deleteProduct,
   getaSingleProduct,
+  searchProducts,
 };

@@ -46,7 +46,8 @@ const {
   getAllProduct,
   updateProduct,
   deleteProduct,
-  getaSingleProduct
+  getaSingleProduct,
+  searchProducts
 } = require("../controller/product-controller/product-controller");
 
 //for brand
@@ -90,5 +91,5 @@ productRoute.route("/product/get-all-product").get(getAllProduct);
 productRoute.route("/product/delete-product/:id").delete(deleteProduct);
 productRoute.route("/product/update-product/:id").put(updateProduct);
 productRoute.route("/product/single-product/:id").get(getaSingleProduct);
-
+productRoute.route("/product/search").get(searchProducts);
 module.exports = productRoute;
