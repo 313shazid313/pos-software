@@ -21,8 +21,6 @@ const productApi = createApi({
       providesTags: ["Product"],
     }),
 
-
-
     getAllProducts: builder.query({
       query: ({ page }) => `/get-all-product?page=${page}`,
       providesTags: ["Product"],
@@ -51,6 +49,12 @@ const productApi = createApi({
       }),
       invalidatesTags: (result, error, id) => [{ type: "Product", id }],
     }),
+
+    //search products
+    searchProducts: builder.query({
+      query: ( searchedname ) => `/search?query=${searchedname}`,
+      providesTags: ["Product"],
+    }),
   }),
 });
 
@@ -60,6 +64,7 @@ export const {
   useGetAllProductsQuery,
   useUpdateProductMutation,
   useSingleProductQuery,
+  useSearchProductsQuery
 } = productApi;
 
 export default productApi;
