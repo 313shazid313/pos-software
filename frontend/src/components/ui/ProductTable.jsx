@@ -50,7 +50,7 @@ const ProductTable = () => {
   const [searchElement, setSearchElement] = useState();
   const { data: searchedData } = useSearchProductsQuery(searchElement);
   console.log(searchedData);
-  
+
   return (
     <div>
       <p className="text-2xl py-8">Manage Products</p>
@@ -86,7 +86,7 @@ const ProductTable = () => {
                 onChange={(e) => setSearchElement(e.target.value)}
               />
             </div>
-            <button className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            {/* <button className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -103,7 +103,7 @@ const ProductTable = () => {
                 />
               </svg>
               <span className="sr-only">Search</span>
-            </button>
+            </button> */}
           </div>
         </div>
         {/* new item */}
