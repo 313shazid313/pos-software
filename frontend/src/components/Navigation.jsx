@@ -1,32 +1,58 @@
 import { initFlowbite } from "flowbite";
-import { useEffect } from "react"
+import { useEffect } from "react";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 
 import { NavLink, Outlet } from "react-router-dom";
 
-
 const Navigation = () => {
-
-
   useEffect(() => {
     initFlowbite();
   }, []);
 
-
   return (
     <div>
-      <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+      <button
+        data-drawer-target="sidebar-multi-level-sidebar"
+        data-drawer-toggle="sidebar-multi-level-sidebar"
+        aria-controls="sidebar-multi-level-sidebar"
+        type="button"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      >
         <span className="sr-only">Open sidebar</span>
-        <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+        <svg
+          className="w-6 h-6"
+          aria-hidden="true"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clipRule="evenodd"
+            fillRule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+          ></path>
         </svg>
       </button>
 
-      <aside id="sidebar-multi-level-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+      <aside
+        id="sidebar-multi-level-sidebar"
+        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        aria-label="Sidebar"
+      >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li>
-              <NavLink to='/' className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+              <NavLink
+                to="/"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                >
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
@@ -34,53 +60,145 @@ const Navigation = () => {
               </NavLink>
             </li>
 
-
             <li>
-              <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+              <button
+                type="button"
+                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                aria-controls="dropdown-example"
+                data-collapse-toggle="dropdown-example"
+              >
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g data-name="43.List">
+                    <path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" />
+                    <path d="M10 7h8v2h-8zM6 7h2v2H6zM10 11h8v2h-8zM6 11h2v2H6zM10 15h8v2h-8zM6 15h2v2H6z" />
+                  </g>
+                </svg>
 
-                <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="43.List"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" /><path d="M10 7h8v2h-8zM6 7h2v2H6zM10 11h8v2h-8zM6 11h2v2H6zM10 15h8v2h-8zM6 15h2v2H6z" /></g></svg>
-
-                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
-                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                  Users
+                </span>
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
                 </svg>
               </button>
               <ul id="dropdown-example" className="hidden py-2 space-y-2">
                 <li>
-                  <NavLink to='users-table' className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                    <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g data-name="39-User-List"><path d="M23 13h2v-2a2 2 0 0 0-1-1.73V8A8 8 0 0 0 8 8v1.27A2 2 0 0 0 7 11v2a2 2 0 0 0 1 1.75 8.07 8.07 0 0 0 4 6.16v1.39L4.7 25c-.91.23-4.7 1.37-4.7 4v2a1 1 0 0 0 1 1h14v-2H2v-1c0-.78 1.92-1.7 3.24-2h.11l8-3a1 1 0 0 0 .65-1v-2.69a1 1 0 0 0-.57-.9A6 6 0 0 1 10 14a1 1 0 0 0-1-1v-2a1 1 0 0 0 1-1V8a6 6 0 0 1 12 0v2a1 1 0 0 0 1 1z" /><rect x="17" y="15" width="4" height="4" rx="1" ry="1" /><rect x="17" y="21" width="4" height="4" rx="1" ry="1" /><rect x="17" y="27" width="4" height="4" rx="1" ry="1" /><path d="M23 16h6v2h-6zM23 22h6v2h-6zM23 28h6v2h-6z" /></g></svg>
-                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users List</span>
+                  <NavLink
+                    to="users-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    <svg
+                      className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32"
+                    >
+                      <g data-name="39-User-List">
+                        <path d="M23 13h2v-2a2 2 0 0 0-1-1.73V8A8 8 0 0 0 8 8v1.27A2 2 0 0 0 7 11v2a2 2 0 0 0 1 1.75 8.07 8.07 0 0 0 4 6.16v1.39L4.7 25c-.91.23-4.7 1.37-4.7 4v2a1 1 0 0 0 1 1h14v-2H2v-1c0-.78 1.92-1.7 3.24-2h.11l8-3a1 1 0 0 0 .65-1v-2.69a1 1 0 0 0-.57-.9A6 6 0 0 1 10 14a1 1 0 0 0-1-1v-2a1 1 0 0 0 1-1V8a6 6 0 0 1 12 0v2a1 1 0 0 0 1 1z" />
+                        <rect
+                          x="17"
+                          y="15"
+                          width="4"
+                          height="4"
+                          rx="1"
+                          ry="1"
+                        />
+                        <rect
+                          x="17"
+                          y="21"
+                          width="4"
+                          height="4"
+                          rx="1"
+                          ry="1"
+                        />
+                        <rect
+                          x="17"
+                          y="27"
+                          width="4"
+                          height="4"
+                          rx="1"
+                          ry="1"
+                        />
+                        <path d="M23 16h6v2h-6zM23 22h6v2h-6zM23 28h6v2h-6z" />
+                      </g>
+                    </svg>
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                      Users List
+                    </span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="roles-table" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                    <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                  <NavLink
+                    to="roles-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    <svg
+                      className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"
+                      />
                     </svg>
 
-                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Role List</span>
-
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                      Role List
+                    </span>
                   </NavLink>
                 </li>
               </ul>
             </li>
 
-
             <li>
-              <NavLink to="product-table" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <span className="flex-1 ms-3 whitespace-nowrap">Products List</span>
+              <NavLink
+                to="product-table"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <AiOutlineAppstoreAdd className="text-2xl" />
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Products List
+                </span>
               </NavLink>
             </li>
 
-
-
             <li>
-              <button type="button" className="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-product" data-collapse-toggle="dropdown-Product">
-
-
-
-
-                <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <button
+                type="button"
+                className="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                aria-controls="dropdown-product"
+                data-collapse-toggle="dropdown-Product"
+              >
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="Layer_2" data-name="Layer 2">
                     <g id="invisible_box" data-name="invisible box">
                       <rect width="48" height="48" fill="none" />
@@ -93,37 +211,68 @@ const Navigation = () => {
                   </g>
                 </svg>
 
-
-
-
-                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
-                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+                  Categories
+                </span>
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
                 </svg>
               </button>
               <ul id="dropdown-Product" className="hidden py-2 space-y-2">
                 <li>
-                  <NavLink to='category-table' className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Manage Category</NavLink>
+                  <NavLink
+                    to="category-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Manage Category
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to='origin-table' className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Manage Origin</NavLink>
+                  <NavLink
+                    to="origin-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Manage Origin
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="brand-table" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Manage Brand</NavLink>
+                  <NavLink
+                    to="brand-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Manage Brand
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to='unit-table' className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Manage Unit</NavLink>
+                  <NavLink
+                    to="unit-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Manage Unit
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to='type-table' className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Manage Type</NavLink>
+                  <NavLink
+                    to="type-table"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Manage Type
+                  </NavLink>
                 </li>
               </ul>
             </li>
-
-
-
-
-
 
             {/* <li>
               <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -177,17 +326,9 @@ const Navigation = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
               </a>
             </li> */}
-
-
-
-
-
           </ul>
         </div>
-
       </aside>
-
-
 
       {/* outlet */}
       <div className="p-4 sm:ml-64">
@@ -195,7 +336,7 @@ const Navigation = () => {
       </div>
       {/* outlet */}
     </div>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

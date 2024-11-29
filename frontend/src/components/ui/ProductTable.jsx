@@ -6,7 +6,9 @@ import {
   useSearchProductsQuery,
 } from "../../redux/services/productsApi";
 
-
+//icons
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteSweep } from "react-icons/md";
 
 const ProductTable = () => {
   // ? hooks for pagination ------->
@@ -15,19 +17,21 @@ const ProductTable = () => {
   const [numberOfPages, setNumberOfPages] = useState(0);
   // ? hooks for pagination ------->
 
-  // const [searchQuery, setSearchQuery] = useState("");
-
+  //? code for delete----------
   const { data, refetch } = useGetAllProductsQuery({ page: pageNumber });
   const [deleteaProduct] = useDeleteaProductMutation();
 
   const handleProductDelete = async (productId) => {
     try {
-      await deleteaProduct(productId);
-      refetch();
+      if (confirm("Sure You want to delete Product ???")) {
+        await deleteaProduct(productId);
+        refetch();
+      }
     } catch (error) {
       console.error("Failed to delete the product:", error);
     }
   };
+  //? code for delete-----------
 
   // ?pagination ------->
   const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
@@ -48,12 +52,12 @@ const ProductTable = () => {
   }, [data]);
   //? pagination------>
 
-  // ?search
-
+  // ?search utility -----------
   const [searchQuery, setSearchQuery] = useState("");
   const { data: searchData } = useSearchProductsQuery(searchQuery);
 
   // console.log(searchData);
+  console.log(searchQuery);
 
   return (
     <div>
@@ -85,33 +89,12 @@ const ProductTable = () => {
                 type="text"
                 id="simple-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search branch name..."
+                placeholder="Search with name..."
                 required
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <button
-              // onClick={handleSearch}
-              className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              <svg
-                className="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-              <span className="sr-only">Search</span>
-            </button>
           </div>
         </div>
         {/* new item */}
@@ -164,9 +147,6 @@ const ProductTable = () => {
                   <th scope="col" className="px-6 py-3">
                     Actions
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    Actions
-                  </th>
                 </tr>
               </thead>
 
@@ -190,18 +170,14 @@ const ProductTable = () => {
                     <td className="px-6 py-4">{item.vat}</td>
                     <td className="px-6 py-4">{item.sellType}</td>
                     <td className="px-6 py-4 flex space-x-2">
-                      <button
-                        onClick={() => handleProductDelete(item.id)}
-                        className="px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600"
-                      >
-                        Delete
-                      </button>
-                      <Link
-                        to={`product-update/${item.id}`}
-                        className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                      >
-                        Edit
-                      </Link>
+                      <div className="flex flex-row ">
+                        <button onClick={() => handleProductDelete(item.id)}>
+                          <MdDeleteSweep className="text-2xl text-red-700 m-4" />
+                        </button>
+                        <Link to={`product-update/${item.id}`}>
+                          <FaEdit className="text-xl text-green-700 m-4" />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -319,6 +295,7 @@ const ProductTable = () => {
                       >
                         Delete
                       </button>
+
                       <Link
                         to={`product-update/${item.id}`}
                         className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"

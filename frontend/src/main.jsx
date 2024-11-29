@@ -30,6 +30,9 @@ import BrandUpdate from "./components/ui/product-additionals/BrandUpdate.jsx";
 import UnitUpdate from "./components/ui/product-additionals/UnitUpdate.jsx";
 import TypeUpdate from "./components/ui/product-additionals/TypeUpdate.jsx";
 import ProductUpdate from "./components/ui/ProductUpdate.jsx";
+import SupplierTable from "./components/ui/supplier/SupplierTable.jsx";
+import SupplierForm from "./components/ui/supplier/SupplierForm.jsx";
+import SupplierUpdate from "./components/ui/supplier/SupplierUpdate.jsx";
 
 const router = createBrowserRouter(
   [
@@ -131,6 +134,18 @@ const router = createBrowserRouter(
         {
           path: "product-table/product-update/:id",
           element: <ProductUpdate />,
+        },
+        {
+          path: "supplier-table",
+          element: <SupplierTable />,
+        },
+        {
+          path: "supplier-table/supplier-form",
+          element: <SupplierForm />,
+        },
+        {
+          path: "supplier-table/supplier-form/:id",
+          element: <SupplierUpdate />,
         },
       ],
     },
