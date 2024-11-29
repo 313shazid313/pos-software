@@ -8,10 +8,12 @@ import originApi from "./product-additionals-state/originApi";
 import typeApi from "./product-additionals-state/typeApi";
 import productApi from "./services/productsApi";
 
+
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
+
     auth: authReducerR,
+    [authApi.reducerPath]: authApi.reducer,
     [brandApi.reducerPath]: brandApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [unitApi.reducerPath]: unitApi.reducer,

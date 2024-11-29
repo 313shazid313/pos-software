@@ -6,6 +6,8 @@ import {
   useSearchProductsQuery,
 } from "../../redux/services/productsApi";
 
+
+
 const ProductTable = () => {
   // ? hooks for pagination ------->
   const [products, setProducts] = useState([]);
@@ -47,9 +49,11 @@ const ProductTable = () => {
   //? pagination------>
 
   // ?search
-  const [searchElement, setSearchElement] = useState();
-  const { data: searchedData } = useSearchProductsQuery(searchElement);
-  console.log(searchedData);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const { data: searchData } = useSearchProductsQuery(searchQuery);
+
+  // console.log(searchData);
 
   return (
     <div>
@@ -83,10 +87,14 @@ const ProductTable = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search branch name..."
                 required
-                onChange={(e) => setSearchElement(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            {/* <button className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button
+              // onClick={handleSearch}
+              className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -103,7 +111,7 @@ const ProductTable = () => {
                 />
               </svg>
               <span className="sr-only">Search</span>
-            </button> */}
+            </button>
           </div>
         </div>
         {/* new item */}
@@ -119,121 +127,212 @@ const ProductTable = () => {
         </div>
       </div>
 
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Index
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Product name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Brand
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Category
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Sell Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Type
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Unit
-              </th>
-              <th scope="col" className="px-6 py-3">
-                VAT
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Sell Type
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Actions
-              </th>
-            </tr>
-          </thead>
+      {searchQuery == [] ? (
+        <div>
+          {/* table  */}
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Index
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Product name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Brand
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Sell Price
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Unit
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    VAT
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Sell Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Actions
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {products?.map((item, index) => (
-              <tr
-                className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                key={item.id}
-              >
-                <td className="px-6 py-4">{index + 1}</td>
-                <td className="px-6 py-4">{item.name}</td>
-                <td className="px-6 py-4">{item.ProductBrand?.brandName}</td>
-                <td className="px-6 py-4">
-                  {item.ProductCategory?.categoryName}
-                </td>
-                <td className="px-6 py-4">{item.price}</td>
-                <td className="px-6 py-4">{item.ProductType?.TypeName}</td>
-                <td className="px-6 py-4">{item.ProductUnit?.UnitName}</td>
-                <td className="px-6 py-4">{item.vat}</td>
-                <td className="px-6 py-4">{item.sellType}</td>
-                <td className="px-6 py-4 flex space-x-2">
-                  <button
-                    onClick={() => handleProductDelete(item.id)}
-                    className="px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+              <tbody>
+                {products?.map((item, index) => (
+                  <tr
+                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                    key={item.id}
                   >
-                    Delete
-                  </button>
-                  <Link
-                    to={`product-update/${item.id}`}
-                    className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                  >
-                    Edit
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={gotoPrevious}
-          disabled={pageNumber === 0}
-          className={`px-4 py-2 rounded-lg ${
-            pageNumber === 0
-              ? "bg-gray-300 text-gray-600"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          Previous
-        </button>
-
-        <div className="flex space-x-2">
-          {pages.map((pageIndex) => (
+                    <td className="px-6 py-4">{index + 1}</td>
+                    <td className="px-6 py-4">{item.name}</td>
+                    <td className="px-6 py-4">
+                      {item.ProductBrand?.brandName}
+                    </td>
+                    <td className="px-6 py-4">
+                      {item.ProductCategory?.categoryName}
+                    </td>
+                    <td className="px-6 py-4">{item.price}</td>
+                    <td className="px-6 py-4">{item.ProductType?.TypeName}</td>
+                    <td className="px-6 py-4">{item.ProductUnit?.UnitName}</td>
+                    <td className="px-6 py-4">{item.vat}</td>
+                    <td className="px-6 py-4">{item.sellType}</td>
+                    <td className="px-6 py-4 flex space-x-2">
+                      <button
+                        onClick={() => handleProductDelete(item.id)}
+                        className="px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                      <Link
+                        to={`product-update/${item.id}`}
+                        className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* pagination */}
+          <div className="flex justify-between mt-6">
             <button
-              key={pageIndex}
-              onClick={() => setPageNumber(pageIndex)}
-              className={`px-4 py-2 ${
-                pageIndex === pageNumber
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              } rounded-lg`}
+              onClick={gotoPrevious}
+              disabled={pageNumber === 0}
+              className={`px-4 py-2 rounded-lg ${
+                pageNumber === 0
+                  ? "bg-gray-300 text-gray-600"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+              }`}
             >
-              {pageIndex + 1}
+              Previous
             </button>
-          ))}
-        </div>
 
-        <button
-          onClick={gotoNext}
-          disabled={pageNumber >= numberOfPages - 1}
-          className={`px-4 py-2 rounded-lg ${
-            pageNumber >= numberOfPages - 1
-              ? "bg-gray-300 text-gray-600"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          Next
-        </button>
-      </div>
+            <div className="flex space-x-2">
+              {pages.map((pageIndex) => (
+                <button
+                  key={pageIndex}
+                  onClick={() => setPageNumber(pageIndex)}
+                  className={`px-4 py-2 ${
+                    pageIndex === pageNumber
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  } rounded-lg`}
+                >
+                  {pageIndex + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={gotoNext}
+              disabled={pageNumber >= numberOfPages - 1}
+              className={`px-4 py-2 rounded-lg ${
+                pageNumber >= numberOfPages - 1
+                  ? "bg-gray-300 text-gray-600"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Index
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Product name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Brand
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Sell Price
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Unit
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    VAT
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Sell Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Actions
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {searchData?.searchedItem?.map((item, index) => (
+                  <tr
+                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                    key={item.id}
+                  >
+                    <td className="px-6 py-4">{index + 1}</td>
+                    <td className="px-6 py-4">{item.name}</td>
+                    <td className="px-6 py-4">
+                      {item.ProductBrand?.brandName}
+                    </td>
+                    <td className="px-6 py-4">
+                      {item.ProductCategory?.categoryName}
+                    </td>
+                    <td className="px-6 py-4">{item.price}</td>
+                    <td className="px-6 py-4">{item.ProductType?.TypeName}</td>
+                    <td className="px-6 py-4">{item.ProductUnit?.UnitName}</td>
+                    <td className="px-6 py-4">{item.vat}</td>
+                    <td className="px-6 py-4">{item.sellType}</td>
+                    <td className="px-6 py-4 flex space-x-2">
+                      <button
+                        onClick={() => handleProductDelete(item.id)}
+                        className="px-3 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                      <Link
+                        to={`product-update/${item.id}`}
+                        className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
