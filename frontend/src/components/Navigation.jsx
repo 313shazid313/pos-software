@@ -1,9 +1,10 @@
 import { initFlowbite } from "flowbite";
 import { useEffect } from "react";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
-
 import { NavLink, Outlet } from "react-router-dom";
 
+// ICONS
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { IoPeopleSharp } from "react-icons/io5";
 const Navigation = () => {
   useEffect(() => {
     initFlowbite();
@@ -326,6 +327,16 @@ const Navigation = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
               </a>
             </li> */}
+
+            <li>
+              <NavLink
+                to="supplier-table"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <IoPeopleSharp className="text-xl"  />
+                <span className="ms-3">Supplier</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
       </aside>

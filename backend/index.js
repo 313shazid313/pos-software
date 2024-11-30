@@ -7,14 +7,14 @@ const cors = require("cors");
 
 dotenv.config();
 
-// ! package middleware 
+// ! package middleware
 const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
 app.use(
   cors({
     origin: "http://localhost:5173",
-    credentials: true
+    credentials: true,
   })
 );
 const port = process.env.PORT;
@@ -50,4 +50,3 @@ app.use("/role", roleRoute);
 app.use("/user", userRoute);
 app.use("/product-route", productRoute);
 app.use("/supply", supplierRoute);
-

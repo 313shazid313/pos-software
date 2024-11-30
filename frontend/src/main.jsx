@@ -144,7 +144,7 @@ const router = createBrowserRouter(
           element: <SupplierForm />,
         },
         {
-          path: "supplier-table/supplier-form/:id",
+          path: "supplier-table/supplier-update/:id",
           element: <SupplierUpdate />,
         },
       ],

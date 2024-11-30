@@ -33,6 +33,20 @@ const getAllSupplier = async (req, res) => {
   }
 };
 
+const getASingleSupplier = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const aSupplier = await Supplier.findOne({
+      where: {
+        id: id,
+      },
+    });
+    return res.status(200).json({ message: "a suppliers", aSupplier });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 const editSupplier = async (req, res) => {
   try {
     const { name, mobile, email, address } = req.body;
@@ -74,4 +88,5 @@ module.exports = {
   getAllSupplier,
   editSupplier,
   deleteSupplier,
+  getASingleSupplier,
 };

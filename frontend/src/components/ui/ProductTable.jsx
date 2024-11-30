@@ -1,3 +1,4 @@
+import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
@@ -18,7 +19,9 @@ const ProductTable = () => {
   // ? hooks for pagination ------->
 
   //? code for delete----------
-  const { data, refetch } = useGetAllProductsQuery({ page: pageNumber });
+  const { data, refetch, isLoading } = useGetAllProductsQuery({
+    page: pageNumber,
+  });
   const [deleteaProduct] = useDeleteaProductMutation();
 
   const handleProductDelete = async (productId) => {
@@ -58,6 +61,10 @@ const ProductTable = () => {
 
   // console.log(searchData);
   console.log(searchQuery);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -175,7 +182,7 @@ const ProductTable = () => {
                           <MdDeleteSweep className="text-2xl text-red-700 m-4" />
                         </button>
                         <Link to={`product-update/${item.id}`}>
-                          <FaEdit className="text-xl text-green-700 m-4" />
+                          <FaEdit className="text-xl text-blue-500 m-4" />
                         </Link>
                       </div>
                     </td>
