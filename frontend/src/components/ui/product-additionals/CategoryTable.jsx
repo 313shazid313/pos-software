@@ -6,18 +6,17 @@ import {
 import Loading from "../../Loading";
 import Error404 from "../../Error404";
 
-
 import { useNavigate } from "react-router-dom";
 
 const CategoryTable = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data, isError, isLoading } = useGetAllCategoriesQuery();
 
   let serial = 0;
 
   console.log(data);
 
-  const [deleteaCategory] = useDeleteaCategoryMutation();
+  // const [deleteaCategory] = useDeleteaCategoryMutation();
 
   // const handleCategoryDelete = async (id) => {
   //   try {
@@ -35,10 +34,6 @@ const CategoryTable = () => {
   //   console.log(data);
   //   navigate("category-form");
   // };
-
-  
-
-
 
   if (isLoading) return <Loading />;
   if (isError) return <Error404 />;
