@@ -33,6 +33,7 @@ import ProductUpdate from "./components/ui/ProductUpdate.jsx";
 import SupplierTable from "./components/ui/supplier/SupplierTable.jsx";
 import SupplierForm from "./components/ui/supplier/SupplierForm.jsx";
 import SupplierUpdate from "./components/ui/supplier/SupplierUpdate.jsx";
+import Charts from "./components/Charts.jsx";
 
 const router = createBrowserRouter(
   [
@@ -40,6 +41,10 @@ const router = createBrowserRouter(
       path: "/",
       element: <Protected />,
       children: [
+        {
+          path: "charts",
+          element: <Charts />,
+        },
         {
           path: "users-table",
           element: <UserTable />,

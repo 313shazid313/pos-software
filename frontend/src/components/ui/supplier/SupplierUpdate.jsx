@@ -18,8 +18,7 @@ const SupplierUpdate = () => {
   const { data, isLoading: isDataLoading, error } = useSingleSupplierQuery(id);
 
   console.log(data);
-  const [updateaSupplier, { isLoading: isUpdating }] =
-    useUpdateaSupplierMutation();
+  const [updateaSupplier] = useUpdateaSupplierMutation();
 
   const [element, setElement] = useState({
     name: "",
