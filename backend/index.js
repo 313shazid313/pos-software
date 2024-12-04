@@ -24,7 +24,7 @@ const roleRoute = require("./router/role-router");
 const userRoute = require("./router/user-router");
 const productRoute = require("./router/product-router");
 const supplierRoute = require("./router/supplier-route");
-
+const customerRouter = require("./router/customer-router")
 // importing routes
 
 sequelize
@@ -50,3 +50,4 @@ app.use("/role", roleRoute);
 app.use("/user", userRoute);
 app.use("/product-route", productRoute);
 app.use("/supply", supplierRoute);
+app.use("/customer", customerRouter);
