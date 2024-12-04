@@ -36,6 +36,7 @@ import SupplierUpdate from "./components/ui/supplier/SupplierUpdate.jsx";
 import Charts from "./components/Charts.jsx";
 import CustomerTable from "./components/ui/customer/CustomerTable.jsx";
 import CustomerForm from "./components/ui/customer/CustomerForm.jsx";
+import CustomerUpdate from "./components/ui/customer/CustomerUpdate.jsx";
 
 const router = createBrowserRouter(
   [
@@ -161,6 +162,10 @@ const router = createBrowserRouter(
         {
           path: "customer-table/customer-form",
           element: <CustomerForm />,
+        },
+        {
+          path: "customer-table/customer-update/:id",
+          element: <CustomerUpdate />,
         },
       ],
     },

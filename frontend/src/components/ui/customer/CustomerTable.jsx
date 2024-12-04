@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 //   useGetAllSupplierQuery,
 //   useDeleteaSupplierMutation,
 // } from "../../../redux/services/suppliersApi";
-import { useGetAllCustomerQuery,useDeleteaCustomerMutation } from "../../../redux/services/customerApi";
-
+import {
+  useGetAllCustomerQuery,
+  useDeleteaCustomerMutation,
+} from "../../../redux/services/customerApi";
 
 // icons
 import { MdDeleteSweep } from "react-icons/md";
@@ -13,35 +15,29 @@ import { FaEdit } from "react-icons/fa";
 // components
 import Loading from "../../Loading";
 
-
 const CustomerTable = () => {
+  let serial = 0;
+  const { data, isError, isLoading, refetch } = useGetAllCustomerQuery();
 
+  console.log(data);
 
-    let serial = 0;
-    const { data, isError, isLoading, refetch } = useGetAllCustomerQuery();
-  
-    console.log(data);
-  
-    const [deleteaCustomer] = useDeleteaCustomerMutation();
-  
-    const handleCustomerDelete = async (id) => {
-      try {
-        if (confirm("Sure You Want to Delete")) {
-          const response = await deleteaCustomer(id).unwrap();
-          console.log(response);
-          refetch();
-        }
-      } catch (error) {
-        console.error("Failed to Delete", error);
+  const [deleteaCustomer] = useDeleteaCustomerMutation();
+
+  const handleCustomerDelete = async (id) => {
+    try {
+      if (confirm("Sure You Want to Delete")) {
+        const response = await deleteaCustomer(id).unwrap();
+        console.log(response);
+        refetch();
       }
-    };
-  
-    if (isLoading) {
-      return <Loading />;
+    } catch (error) {
+      console.error("Failed to Delete", error);
     }
-  
+  };
 
-
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div aria-hidden="true">
@@ -104,7 +100,7 @@ const CustomerTable = () => {
                     </button>
                   </td>
                   <td className="px-6 py-4">
-                    <Link to={`supplier-update/${item.id}`}>
+                    <Link to={`customer-update/${item.id}`}>
                       <FaEdit className="text-xl text-blue-500 m-4" />
                     </Link>
                   </td>
@@ -114,7 +110,7 @@ const CustomerTable = () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CustomerTable
+export default CustomerTable;
