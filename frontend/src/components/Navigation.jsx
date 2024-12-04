@@ -333,8 +333,20 @@ const Navigation = () => {
                 to="supplier-table"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <IoPeopleSharp className="text-xl"  />
+                <IoPeopleSharp className="text-xl" />
                 <span className="ms-3">Supplier</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="customer-table"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                {/* <AiOutlineAppstoreAdd className="text-2xl" /> */}
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Customer List
+                </span>
               </NavLink>
             </li>
           </ul>
