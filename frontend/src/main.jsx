@@ -23,7 +23,6 @@ import UnitForm from "./components/ui/product-additionals/UnitForm.jsx";
 import NotFound404 from "./components/ui/NotFound404.jsx";
 import ProductForm from "./components/ui/ProductForm.jsx";
 import ProductTable from "./components/ui/ProductTable.jsx";
-
 import CategoryUpdate from "./components/ui/product-additionals/CategoryUpdate.jsx";
 import OriginUpdate from "./components/ui/product-additionals/OriginUpdate.jsx";
 import BrandUpdate from "./components/ui/product-additionals/BrandUpdate.jsx";
