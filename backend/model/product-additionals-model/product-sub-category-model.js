@@ -9,10 +9,6 @@ const ProductSubCategory = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     ProductCategoryId: {
       type: DataTypes.INTEGER,
       references: {
@@ -25,5 +21,10 @@ const ProductSubCategory = sequelize.define(
     timestamps: true,
   }
 );
+
+ProductCategory.hasMany(ProductSubCategory, {
+  foreignKey: "ProductCategoryId",
+});
+ProductSubCategory.belongsTo(ProductCategory);
 
 module.exports = ProductSubCategory;
