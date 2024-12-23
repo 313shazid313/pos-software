@@ -8,11 +8,29 @@ const ProductCategory = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
- 
+    parentCategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "ProductCategories",
+        key: "id",
+      },
+    },
   },
   {
     timestamps: true,
+    tableName: "ProductCategories",
   }
 );
+
+ProductCategory.hasMany(ProductCategory, {
+  foreignKey: "parentCategoryId",
+  as: "subcategories",
+});
+
+ProductCategory.belongsTo(ProductCategory, {
+  foreignKey: "parentCategoryId",
+  as: "parentCategory",
+});
 
 module.exports = ProductCategory;
