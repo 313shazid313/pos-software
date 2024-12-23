@@ -6,6 +6,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { IoPeopleSharp } from "react-icons/io5";
 const Navigation = () => {
+  
   useEffect(() => {
     initFlowbite();
   }, []);

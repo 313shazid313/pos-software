@@ -3,7 +3,6 @@ const ProductCategory = require("../../../model/product-additionals-model/produc
 const createProductCategory = async (req, res) => {
   try {
     const createBrand = await ProductCategory.create(req.body);
-
     return res.status(201).json(createBrand);
   } catch (error) {
     return res.status(500).json({ error: error.message });
