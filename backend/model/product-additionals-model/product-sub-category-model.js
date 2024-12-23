@@ -1,8 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/database");
+const ProductCategory = require("../product-additionals-model/product-category-model");
 
-const ProductCategory = sequelize.define(
-  "ProductCategory",
+const ProductSubCategory = sequelize.define(
+  "ProductSubCategory",
   {
     categoryName: {
       type: DataTypes.STRING,
@@ -12,11 +13,17 @@ const ProductCategory = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-   
+    ProductCategoryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: ProductCategory,
+        key: "id",
+      },
+    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = ProductCategory;
+module.exports = ProductSubCategory;
