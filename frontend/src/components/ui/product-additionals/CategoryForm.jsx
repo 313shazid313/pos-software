@@ -47,14 +47,6 @@ const CategoryForm = () => {
     }
   };
 
-  // const optionsArray = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" },
-  // ];
-
-  // console.log(typeof optionsArray);
-
   function buildParentChildPaths(categories, parentPath = "") {
     let paths = [];
 
@@ -76,22 +68,29 @@ const CategoryForm = () => {
       // Concatenate the child paths to the main paths
       paths = paths.concat(childPaths);
     });
-
     return paths;
   }
 
   const parentChildPaths = buildParentChildPaths(data);
   console.log(parentChildPaths);
 
-  const optionsArray = parentChildPaths.map((item) => {
-    return { label: item.name, value: item.id };
-  });
+  // const optionsArray = parentChildPaths.map((item) => {
+  //   return { label: item.name, value: item.id };
+  // });
 
-  console.log(optionsArray);
+  const optionsArray = [
+    { label: "Selected an Option", value: "X", isDisabled: true },
+    { label: "No Parent Category", value: "" },
+
+    ...parentChildPaths.map((item) => ({
+      label: item.name,
+      value: item.id,
+    })),
+  ];
 
   return (
     <div>
-      <p className="text-2xl font-bold mb-6">Add New Category</p>
+      <p className="text-2xl font-bold mb-6 text-center">Add New Category</p>
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto pt-16">
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -111,10 +110,19 @@ const CategoryForm = () => {
         <div>
           <Select
             options={optionsArray}
-            name="parentCategoryId"
-            onChange={(topG) =>
-              handleInputChange({
-                target: { value: topG, name: "parentCategoryId" },
+            // defaultValue={optionsArray[1]}
+            styles={{
+              input: (base) => ({
+                ...base,
+                "input:focus": {
+                  boxShadow: "none",
+                },
+              }),
+            }}
+            onChange={(selectedOption) =>
+              setElement({
+                ...element,
+                parentCategoryId: selectedOption?.value || "",
               })
             }
           />
