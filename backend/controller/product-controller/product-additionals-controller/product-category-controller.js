@@ -2,21 +2,42 @@ const ProductCategory = require("../../../model/product-additionals-model/produc
 
 const createProductCategory = async (req, res) => {
   try {
-    const createBrand = await ProductCategory.create(req.body);
-    return res.status(201).json(createBrand);
+    const { categoryName, parentCategoryId } = req.body;
+
+    var insObj = {
+      categoryName,
+    };
+
+    if (parentCategoryId) {
+      insObj.parentCategoryId = parentCategoryId;
+    }
+    const createCategory = await ProductCategory.create(insObj);
+
+    return res.status(201).json(createCategory);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
 const getAllCategory = async (req, res) => {
   try {
-    const allBrands = await ProductCategory.findAll({
-      order: [["id", "ASC"]], 
+    const allCategories = await ProductCategory.findAll({
+      order: [["id", "ASC"]],
     });
 
-    return res.status(201).json(allBrands);
+    nestedCategories(allCategories);
+
+    return res.status(201).json(allCategories);
   } catch (error) {
     return res.status(500).json({ error: error.message });
+  }
+};
+
+const nestedCategories = (categories, parentCategoryId = null) => {
+  const categoryList = [];
+  let category;
+
+  if (parentCategoryId == null) {
+    category = categories.filter(cat => cat.parentCategoryId == null);
   }
 };
 
