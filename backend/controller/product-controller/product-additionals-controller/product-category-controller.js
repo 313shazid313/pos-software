@@ -24,21 +24,39 @@ const getAllCategory = async (req, res) => {
       order: [["id", "ASC"]],
     });
 
-    nestedCategories(allCategories);
+    if (!allCategories) {
+      return res.status(201).json({ message: "Categories does not exist" });
+    }
 
-    return res.status(201).json(allCategories);
+    const nestedCates = nestedCategories(allCategories);
+
+    return res.status(201).json(nestedCates);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
 
-const nestedCategories = (categories, parentCategoryId = null) => {
+const nestedCategories = (categories, parentd = null) => {
   const categoryList = [];
   let category;
 
-  if (parentCategoryId == null) {
-    category = categories.filter(cat => cat.parentCategoryId == null);
+  if (parentd == null) {
+    category = categories.filter((cat) => cat.parentCategoryId == null);
+  } else {
+    category = categories.filter(
+      (cat) => String(cat.parentCategoryId) == String(parentd)
+    );
   }
+
+  for (let cate of category) {
+    categoryList.push({
+      id: cate.id,
+      categoryName: cate.categoryName,
+      parentCategoryId: cate.parentCategoryId,
+      children: nestedCategories(categories, cate.id),
+    });
+  }
+  return categoryList;
 };
 
 const deleteACategory = async (req, res) => {
