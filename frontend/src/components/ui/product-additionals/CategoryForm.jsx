@@ -23,7 +23,7 @@ const CategoryForm = () => {
 
   const [element, setElement] = useState({
     categoryName: "",
-    description: "",
+    parentCategoryId: "",
   });
 
   const handleInputChange = (e) => {
@@ -47,34 +47,47 @@ const CategoryForm = () => {
     }
   };
 
-  const optionsArray = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  // const optionsArray = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  // ];
 
-  console.log(typeof optionsArray);
+  // console.log(typeof optionsArray);
 
   function buildParentChildPaths(categories, parentPath = "") {
     let paths = [];
 
     (categories || []).forEach((category) => {
+      // Build the current path
       const currentPath = parentPath
         ? `${parentPath} => ${category.categoryName}`
         : category.categoryName;
 
-      paths.push(currentPath);
+      // Add the current path as an object with name and id
+      paths.push({ name: currentPath, id: category.id });
 
-      paths = paths.concat(
-        buildParentChildPaths(category.children || [], currentPath)
+      // Recursively process children
+      const childPaths = buildParentChildPaths(
+        category.children || [],
+        currentPath
       );
+
+      // Concatenate the child paths to the main paths
+      paths = paths.concat(childPaths);
     });
 
     return paths;
   }
 
   const parentChildPaths = buildParentChildPaths(data);
-  console.log(typeof parentChildPaths);
+  console.log(parentChildPaths);
+
+  const optionsArray = parentChildPaths.map((item) => {
+    return { label: item.name, value: item.id };
+  });
+
+  console.log(optionsArray);
 
   return (
     <div>
@@ -96,7 +109,15 @@ const CategoryForm = () => {
         </div>
 
         <div>
-          <Select options={parentChildPaths} />
+          <Select
+            options={optionsArray}
+            name="parentCategoryId"
+            onChange={(topG) =>
+              handleInputChange({
+                target: { value: topG, name: "parentCategoryId" },
+              })
+            }
+          />
         </div>
 
         {/* <div>
