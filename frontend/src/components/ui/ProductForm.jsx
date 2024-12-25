@@ -257,7 +257,7 @@ const ProductForm = () => {
                   onChange={(selectedOption) =>
                     setItems({
                       ...items,
-                      parentCategoryId: selectedOption?.value || "",
+                      ProductCategoryId: selectedOption?.value || "",
                     })
                   }
                 />
