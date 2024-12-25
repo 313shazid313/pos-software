@@ -7,6 +7,7 @@ import {
   useSearchProductsQuery,
 } from "../../redux/services/productsApi";
 
+
 //icons
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteSweep } from "react-icons/md";
@@ -68,7 +69,7 @@ const ProductTable = () => {
 
   return (
     <div>
-      <p className="text-2xl py-8">Manage Products</p>
+      <p className="text-2xl py-4 text-center">Manage Products</p>
       <div className="flex justify-between">
         <div>
           {/* seaarch bar */}

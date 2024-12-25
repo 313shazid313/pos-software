@@ -37,6 +37,11 @@ import CustomerTable from "./components/ui/customer/CustomerTable.jsx";
 import CustomerForm from "./components/ui/customer/CustomerForm.jsx";
 import CustomerUpdate from "./components/ui/customer/CustomerUpdate.jsx";
 
+
+// import { ToastContainer } from "react-toastify";
+// import 'react-toastify/dist/ReactToastify.css';
+
+import { Toaster } from 'react-hot-toast';
 const router = createBrowserRouter(
   [
     {
@@ -192,5 +197,10 @@ createRoot(document.getElementById("root")).render(
         v7_startTransition: true,
       }}
     />
+    {/* <ToastContainer /> */}
+    <Toaster
+  position="top-right"
+  reverseOrder={false}
+/>
   </Provider>
 );

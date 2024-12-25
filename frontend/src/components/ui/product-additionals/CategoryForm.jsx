@@ -8,8 +8,8 @@ import {
   useCreateCategoryMutation,
 } from "../../../redux/product-additionals-state/categoryApi";
 
-
-
+// import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 const CategoryForm = () => {
   const { data, isError, isLoading } = useGetAllCategoriesQuery();
   console.log(data);
@@ -42,13 +42,14 @@ const CategoryForm = () => {
       await createCategory({ ...element }).unwrap();
       refetch();
       // alert("Create New Category successful!");
-
+      toast("Wow so easy!");
       // navigate(-1);
     } catch (error) {
       console.error(error);
     }
   };
 
+  //? organizing category data -------->
   function buildParentChildPaths(categories, parentPath = "") {
     let paths = [];
 
@@ -76,10 +77,6 @@ const CategoryForm = () => {
   const parentChildPaths = buildParentChildPaths(data);
   console.log(parentChildPaths);
 
-  // const optionsArray = parentChildPaths.map((item) => {
-  //   return { label: item.name, value: item.id };
-  // });
-
   const optionsArray = [
     { label: "Selected an Option", value: "X", isDisabled: true },
     { label: "No Parent Category", value: "" },
@@ -89,7 +86,7 @@ const CategoryForm = () => {
       value: item.id,
     })),
   ];
-
+  //? organizing category data -------->
   return (
     <div>
       <p className="text-2xl font-bold mb-6 text-center">Add New Category</p>

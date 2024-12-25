@@ -30,6 +30,8 @@ import { useGetAllUnitQuery } from "../../redux/product-additionals-state/unitAp
 import { useGetAllCategoriesQuery } from "../../redux/product-additionals-state/categoryApi";
 import { useGetAllBrandsQuery } from "../../redux/product-additionals-state/brandApi";
 
+import Select from "react-select";
+
 const ProductForm = () => {
   const { refetch } = useGetAllProductsQuery();
   const [createProduct] = useCreateProductMutation();
@@ -79,6 +81,7 @@ const ProductForm = () => {
 
   const handleProductSubmit = async (event) => {
     event.preventDefault();
+    console.log(items);
     try {
       await createProduct({ ...items }).unwrap();
       refetch();
@@ -88,6 +91,47 @@ const ProductForm = () => {
       console.error(error);
     }
   };
+
+  // organizing categories
+  //? organizing category data -------->
+  function buildParentChildPaths(categories, parentPath = "") {
+    let paths = [];
+
+    (categories || []).forEach((category) => {
+      // Build the current path
+      const currentPath = parentPath
+        ? `${parentPath} => ${category.categoryName}`
+        : category.categoryName;
+
+      // Add the current path as an object with name and id
+      paths.push({ name: currentPath, id: category.id });
+
+      // Recursively process children
+      const childPaths = buildParentChildPaths(
+        category.children || [],
+        currentPath
+      );
+
+      // Concatenate the child paths to the main paths
+      paths = paths.concat(childPaths);
+    });
+    return paths;
+  }
+
+  const parentChildPaths = buildParentChildPaths(categoryData);
+  // console.log(parentChildPaths);
+
+  const optionsArray = [
+    { label: "Select an Option", value: "X", isDisabled: true },
+    { label: "No Parent Category", value: "" },
+
+    ...parentChildPaths.map((item) => ({
+      label: item.name,
+      value: item.id,
+    })),
+  ];
+  // console.log(optionsArray);
+  //? organizing category data -------->
 
   return (
     <form className="" onSubmit={handleProductSubmit}>
@@ -172,6 +216,7 @@ const ProductForm = () => {
                 />
               </div>
             </div>
+            {/* category */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
@@ -180,7 +225,7 @@ const ProductForm = () => {
                 Product Category
               </label>
               <div className="mt-2">
-                <select
+                {/* <select
                   id="ProductCategoryId"
                   name="ProductCategoryId"
                   value={items.ProductCategoryId || ""}
@@ -196,10 +241,29 @@ const ProductForm = () => {
                         {Item.categoryName}
                       </option>
                     ))}
-                </select>
+                </select> */}
+
+                <Select
+                  options={optionsArray}
+                  // defaultValue={optionsArray[1]}
+                  styles={{
+                    input: (base) => ({
+                      ...base,
+                      "input:focus": {
+                        boxShadow: "none",
+                      },
+                    }),
+                  }}
+                  onChange={(selectedOption) =>
+                    setItems({
+                      ...items,
+                      parentCategoryId: selectedOption?.value || "",
+                    })
+                  }
+                />
               </div>
             </div>
-
+            {/* Brand  */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
@@ -227,7 +291,7 @@ const ProductForm = () => {
                 </select>
               </div>
             </div>
-
+            {/* produ */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
@@ -255,7 +319,7 @@ const ProductForm = () => {
                 </select>
               </div>
             </div>
-
+            {/* Origin */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
@@ -283,6 +347,7 @@ const ProductForm = () => {
                 </select>
               </div>
             </div>
+            {/* Unit */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
