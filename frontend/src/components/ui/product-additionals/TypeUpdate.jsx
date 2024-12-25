@@ -7,12 +7,16 @@ import { useState, useEffect } from "react";
 import Loading from "../../Loading";
 
 const TypeUpdate = () => {
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { data, isLoading: isDataLoading, error } = useSingleTypeQuery(id);
   // console.log(data?.aCategory.originName);
-  console.log(data)
+  console.log(data);
   const [updateType, { isLoading: isUpdating }] = useUpdateTypeMutation();
 
   const [element, setElement] = useState({
@@ -56,7 +60,7 @@ const TypeUpdate = () => {
   return (
     <div>
       <div>
-        <h2 className="text-2xl font-bold mb-6">Update Category</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Update Category</h2>
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto pt-16">
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -84,7 +88,7 @@ const TypeUpdate = () => {
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Write your thoughts here..."
           ></textarea>
-          <div className="pt-5">
+          {/* <div className="pt-5">
             <button
               type="submit"
               disabled={isUpdating}
@@ -93,6 +97,21 @@ const TypeUpdate = () => {
               <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                 {isUpdating ? "Updating..." : "Edit Brand"}
               </span>
+            </button>
+          </div> */}
+          <div className="mt-6 flex items-center justify-end gap-x-6">
+            <button
+              onClick={handleGoBack}
+              type="submit"
+              className="text-sm/6 font-semibold text-gray-900"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Save
             </button>
           </div>
         </form>

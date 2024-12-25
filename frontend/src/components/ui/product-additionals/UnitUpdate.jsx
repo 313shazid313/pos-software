@@ -56,7 +56,7 @@ const UnitUpdate = () => {
   return (
     <div>
       <div>
-        <h2 className="text-2xl font-bold mb-6">Update Category</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Update Category</h2>
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto pt-16">
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

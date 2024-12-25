@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
@@ -8,6 +7,8 @@ import {
   useDeleteaCategoryMutation,
   useCreateCategoryMutation,
 } from "../../../redux/product-additionals-state/categoryApi";
+
+
 
 const CategoryForm = () => {
   const { data, isError, isLoading } = useGetAllCategoriesQuery();
@@ -40,8 +41,9 @@ const CategoryForm = () => {
     try {
       await createCategory({ ...element }).unwrap();
       refetch();
-      alert("Create New Category successful!");
-      navigate(-1);
+      // alert("Create New Category successful!");
+
+      // navigate(-1);
     } catch (error) {
       console.error(error);
     }

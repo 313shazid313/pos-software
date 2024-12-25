@@ -69,7 +69,7 @@ const CategoryTable = () => {
 
   return (
     <div>
-      <p className="text-2xl font-bold mb-6">Manage Category</p>
+      <p className="text-2xl font-bold mb-6 text-center">Manage Category</p>
       {/* {isLoading && <Loading />} */}
       <div className="flex justify-end">
         <Link
