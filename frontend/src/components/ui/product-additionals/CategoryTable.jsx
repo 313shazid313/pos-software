@@ -38,6 +38,35 @@ const CategoryTable = () => {
   if (isLoading) return <Loading />;
   if (isError) return <Error404 />;
 
+
+  function buildParentChildPaths(categories, parentPath = "") {
+    let paths = [];
+
+    (categories || []).forEach((category) => {
+      // Build the current path
+      const currentPath = parentPath
+        ? `${parentPath} => ${category.categoryName}`
+        : category.categoryName;
+
+      // Add the current path as an object with name and id
+      paths.push({ name: currentPath, id: category.id });
+
+      // Recursively process children
+      const childPaths = buildParentChildPaths(
+        category.children || [],
+        currentPath
+      );
+
+      // Concatenate the child paths to the main paths
+      paths = paths.concat(childPaths);
+    });
+    return paths;
+  }
+
+  const parentChildPaths = buildParentChildPaths(data);
+  console.log(parentChildPaths);
+
+
   return (
     <div>
       <p className="text-2xl font-bold mb-6">Manage Category</p>
@@ -63,23 +92,21 @@ const CategoryTable = () => {
               <th scope="col" className="px-6 py-3">
                 Category name
               </th>
-              <th scope="col" className="px-6 py-3">
-                Description
-              </th>
+            
               <th scope="col" className="px-6 py-3">
                 Delete
               </th>
             </tr>
           </thead>
           <tbody>
-            {data?.map((item) => (
+            {parentChildPaths?.map((item) => (
               <tr
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={item.id}
               >
                 <td className="px-6 py-4">{(serial = serial + 1)}</td>
-                <td className="px-6 py-4">{item.categoryName}</td>
-                <td className="px-6 py-4">{item.description}</td>
+                <td className="px-6 py-4">{item.name}</td>
+              
                 {/* <td className="px-6 py-4">
                   <button
                     onClick={() => {
